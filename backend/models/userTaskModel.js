@@ -17,9 +17,14 @@ const taskSchema = new mongoose.Schema({
     ref: "User",
   },
 
-  completed: {
-    type: Boolean,
-    default: false,
+  dueDate: {
+    type: Date,
+    required: true,
+  },
+
+  priorityLevel: {
+    type: [String],
+    default: [],
   },
 });
 
