@@ -25,7 +25,7 @@ const createTask = asyncHandler(async (req, res) => {
 
 const getAlltasks = asyncHandler(async (req, res) => {
   try {
-    const tasks = await UserTaskModel.find();
+    const tasks = await UserTaskModel.find().sort({ priority: -1, dueDate: 1 });
     res.json(tasks);
   } catch (error) {
     res.status(400);
