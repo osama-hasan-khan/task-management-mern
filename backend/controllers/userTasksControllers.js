@@ -82,4 +82,29 @@ const updateTask = asyncHandler(async (req, res) => {
   }
 });
 
-export { createTask, getAlltasks, updateTask, getTask };
+const deleteTask = asyncHandler(async (req, res) => {
+  try {
+    const taskId = req.params.taskId;
+    const userId = req.user._id;
+
+    let task = await UserTaskModel.findById(taskId);
+
+    if (!task) {
+      return res.status(404).json({ msg: "Task not found" });
+    }
+
+    if (task.user.toString() != userId) {
+      return res
+        .status(403)
+        .json({ status: false, msg: "You can't update task of another user" });
+    }
+
+    await UserTaskModel.findByIdAndDelete(taskId);
+    res.status(200).json({ status: true, msg: "Task deleted successfully.." });
+  } catch (error) {
+    res.status(400);
+    throw new Error("Invalid user data");
+  }
+});
+
+export { createTask, getAlltasks, updateTask, getTask, deleteTask };
