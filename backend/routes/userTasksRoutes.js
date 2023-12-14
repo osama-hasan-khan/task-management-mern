@@ -2,6 +2,7 @@ import express from "express";
 import { authenticate } from "../middlewares/authMiddleware.js";
 import {
   createTask,
+  deleteTask,
   getAlltasks,
   getTask,
   updateTask,
@@ -13,5 +14,6 @@ router.post("/createTasks", authenticate, createTask);
 router.get("/getAllTasks", authenticate, getAlltasks);
 router.get("/getTask/:taskId", authenticate, getTask);
 router.put("/updateTask/:taskId", authenticate, updateTask);
+router.delete("/deleteTask/:taskId", authenticate, deleteTask);
 
 export default router;

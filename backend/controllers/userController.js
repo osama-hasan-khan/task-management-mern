@@ -26,50 +26,66 @@ const createUser = asyncHandler(async (req, res) => {
       username: newUser.username,
       email: newUser.email,
     });
-  } catch (error) {
-    res.status(400);
-    throw new Error("Invalid user data");
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log("Error in signupUser: ", err.message);
   }
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
+    const existingUser = await User.findOne({ email });
 
-  const existingUser = await User.findOne({ email });
+    if (!existingUser) return res.status(400).json({ error: "Invalid email" });
 
-  if (existingUser) {
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      existingUser.password
-    );
+    if (existingUser) {
+      const isPasswordValid = await bcrypt.compare(
+        password,
+        existingUser.password
+      );
 
-    if (isPasswordValid) {
-      createToken(res, existingUser._id);
+      if (isPasswordValid) {
+        createToken(res, existingUser._id);
 
-      res.status(201).json({
-        _id: existingUser._id,
-        username: existingUser.username,
-        email: existingUser.email,
-      });
+        res.status(201).json({
+          _id: existingUser._id,
+          username: existingUser.username,
+          email: existingUser.email,
+        });
 
-      return;
+        return;
+      }
     }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    console.log("Error in loginUser: ", error.message);
   }
 });
 
 const logoutCurrentUser = asyncHandler(async (req, res) => {
-  res.cookie("jwt", "", {
-    httyOnly: true,
-    expires: new Date(0),
-  });
+  try {
+    res.cookie("jwt", "", {
+      httyOnly: true,
+      expires: new Date(0),
+    });
 
-  res.status(200).json({ message: "Logged out successfully" });
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log("Error in signupUser: ", err.message);
+  }
 });
 
 const getAllUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({});
-  res.json(users);
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log("Error in signupUser: ", err.message);
+  }
 });
 
-export { createUser, loginUser, logoutCurrentUser , getAllUsers};
+export { createUser, loginUser, logoutCurrentUser, getAllUsers };

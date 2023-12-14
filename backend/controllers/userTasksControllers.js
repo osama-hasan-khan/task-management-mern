@@ -17,9 +17,9 @@ const createTask = asyncHandler(async (req, res) => {
     const savedTask = await task.save();
 
     res.status(201).json(savedTask);
-  } catch (error) {
-    res.status(400);
-    throw new Error("Invalid user data");
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log(err);
   }
 });
 
@@ -27,9 +27,9 @@ const getAlltasks = asyncHandler(async (req, res) => {
   try {
     const tasks = await UserTaskModel.find().sort({ priority: -1, dueDate: 1 });
     res.json(tasks);
-  } catch (error) {
-    res.status(400);
-    throw new Error("Invalid user data");
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log(err);
   }
 });
 
@@ -42,9 +42,9 @@ const getTask = asyncHandler(async (req, res) => {
     }
 
     res.status(200).json(task);
-  } catch (error) {
-    res.status(400);
-    throw new Error("Invalid user data");
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log(err);
   }
 });
 
@@ -76,9 +76,9 @@ const updateTask = asyncHandler(async (req, res) => {
       .json({ task, status: true, msg: "Task updated successfully.." });
 
     res.json({ msg: "Task updated successfully", task });
-  } catch (error) {
-    res.status(400);
-    throw new Error("Invalid user data");
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log(err);
   }
 });
 
@@ -101,9 +101,9 @@ const deleteTask = asyncHandler(async (req, res) => {
 
     await UserTaskModel.findByIdAndDelete(taskId);
     res.status(200).json({ status: true, msg: "Task deleted successfully.." });
-  } catch (error) {
-    res.status(400);
-    throw new Error("Invalid user data");
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log(err);
   }
 });
 
