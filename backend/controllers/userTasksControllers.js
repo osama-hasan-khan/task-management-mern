@@ -54,18 +54,26 @@ const updateTask = asyncHandler(async (req, res) => {
     const userId = req.user._id;
     const updateData = req.body;
 
-    const task = await UserTaskModel.findOne({ user: userId });
+    let task = await UserTaskModel.findById(taskId);
+
+    // const task = await UserTaskModel.findOne({ _id: taskId, user: userId });
 
     if (!task) {
       return res.status(404).json({ msg: "Task not found" });
     }
 
-    task.title = updateData.title;
-    task.description = updateData.description;
-    task.dueDate = updateData.dueDate;
-    task.priorityLevel = updateData.priorityLevel;
+    if (task.user.toString() != userId) {
+      return res
+        .status(403)
+        .json({ status: false, msg: "You can't update task of another user" });
+    }
 
-    await task.save();
+    task = await UserTaskModel.findByIdAndUpdate(taskId, updateData, {
+      new: true,
+    });
+    res
+      .status(200)
+      .json({ task, status: true, msg: "Task updated successfully.." });
 
     res.json({ msg: "Task updated successfully", task });
   } catch (error) {
