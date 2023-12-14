@@ -107,4 +107,29 @@ const deleteTask = asyncHandler(async (req, res) => {
   }
 });
 
-export { createTask, getAlltasks, updateTask, getTask, deleteTask };
+const searchUserTask = asyncHandler(async (req, res) => {
+  try {
+    const searchTerm = req.query.searchTerm || "";
+
+    const result = await UserTaskModel.find({
+      $or: [
+        { title: { $regex: searchTerm, $options: "i" } },
+        { description: { $regex: searchTerm, $options: "i" } },
+      ],
+    });
+
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log(err);
+  }
+});
+
+export {
+  createTask,
+  getAlltasks,
+  updateTask,
+  getTask,
+  deleteTask,
+  searchUserTask,
+};
