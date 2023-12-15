@@ -37,8 +37,15 @@ const SignUp = () => {
           />
         </form>
 
+        <Link
+          to="/dashboard"
+          className="mt-3 px-3 py-1.5 bg-black text-white font-bold text-center rounded-md"
+        >
+          Sign up
+        </Link>
+
         <Link to="/login" className="mt-4">
-          Already have an account{" "}
+          Already have an account
           <button className="underline ml-2">Login</button>
         </Link>
       </div>

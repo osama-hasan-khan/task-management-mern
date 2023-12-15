@@ -16,7 +16,7 @@ const HomePage = () => {
         <h6 className="font-bold">Convenient and productive task manager</h6>
         <Link
           to="/signup"
-          className="bg-green-400 px-3 py-1.5 rounded-full font-bold"
+          className="mt-3 px-3 py-1.5 bg-black text-white font-bold text-center rounded-lg"
         >
           Get Started For Free
         </Link>
