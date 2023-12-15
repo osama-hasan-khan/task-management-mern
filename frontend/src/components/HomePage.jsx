@@ -7,16 +7,16 @@ const HomePage = () => {
   return (
     <div className="flex flex-row justify-between p-6 h-screen">
       <div className="flex flex-col gap-3 items-center justify-center">
-        <h1 className="font-extrabold text-6xl">
-          <ReactTyped strings={["LeafBoard"]} typeSpeed={300} loop />
+        <h1 className="font-extrabold font-myFont text-6xl">
+          <ReactTyped strings={["LeafBoard"]} typeSpeed={350} loop />
         </h1>
-        <h5 className="text-xl font-bold">
+        <h5 className="text-xl font-myFont tracking-widest">
           A platform built for a new of working
         </h5>
-        <h6 className="font-bold">Convenient and productive task manager</h6>
+        <h6 className="font-myFont text-3xl">Convenient and productive task manager</h6>
         <Link
           to="/signup"
-          className="mt-3 px-3 py-1.5 bg-black text-white font-bold text-center rounded-lg"
+          className="mt-3 px-3 py-1.5 bg-black text-white text-center rounded-lg font-myFont"
         >
           Get Started For Free
         </Link>
