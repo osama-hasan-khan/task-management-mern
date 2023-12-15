@@ -28,7 +28,7 @@ const createUser = asyncHandler(async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
-    console.log("Error in signupUser: ", err.message);
+    console.log("Error in creating user: ", err.message);
   }
 });
 
@@ -74,7 +74,7 @@ const logoutCurrentUser = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
-    console.log("Error in signupUser: ", err.message);
+    console.log("Error in logout user: ", err.message);
   }
 });
 
@@ -84,8 +84,49 @@ const getAllUsers = asyncHandler(async (req, res) => {
     res.json(users);
   } catch (err) {
     res.status(500).json({ error: err.message });
-    console.log("Error in signupUser: ", err.message);
+    console.log("Error in get all users: ", err.message);
   }
 });
 
-export { createUser, loginUser, logoutCurrentUser, getAllUsers };
+const updateCurrentUserProfile = asyncHandler(async (req, res) => {
+  try {
+    const { email, username, password } = req.body;
+    const userId = req.user._id;
+
+    let user = await User.findById(userId);
+    if (!user) return res.status(400).json({ error: "User not found" });
+
+    if (req.params.userId !== userId.toString())
+      return res
+        .status(400)
+        .json({ error: "You cannot update other user's profile" });
+
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      user.password = hashedPassword;
+    }
+
+    user.username = username || user.username;
+    user.email = email || user.email;
+
+    user = await user.save();
+
+    res.json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log("Error in update user : ", err.message);
+  }
+});
+
+export {
+  createUser,
+  loginUser,
+  logoutCurrentUser,
+  getAllUsers,
+  updateCurrentUserProfile,
+};
