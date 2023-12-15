@@ -16,7 +16,7 @@ const HomePage = () => {
         <h6 className="font-myFont text-3xl">Convenient and productive task manager</h6>
         <Link
           to="/signup"
-          className="mt-3 px-3 py-1.5 bg-black text-white text-center rounded-lg font-myFont"
+          className="mt-3 px-3 py-1.5 bg-black text-white text-center rounded-lg font-myFont tracking-widest"
         >
           Get Started For Free
         </Link>

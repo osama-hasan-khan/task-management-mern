@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import myImage from "../assets/images/isometric-view-san-francisco-s-bridge.jpg";
 import { Link } from "react-router-dom";
+import { CiUser } from "react-icons/ci";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 const SignUp = () => {
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
-    <div className="flex flex-row h-screen gap-x-20">
+    <div className="flex flex-row h-screen justify-between items-center mr-24">
       <img
         src={myImage}
         alt="image"
@@ -19,29 +26,42 @@ const SignUp = () => {
           <label htmlFor="" className="font-myFont tracking-widest">
             Username
           </label>
-          <input
-            type="text"
-            className="outline-none border border-slate-300 px-3 py-1 rounded-lg w-[80%]"
-          />
+          <div className="relative">
+            <CiUser className="absolute left-3 top-2" />
+            <input
+              type="text"
+              placeholder="John Doe"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
+            />
+          </div>
+
           <label htmlFor="" className="font-myFont tracking-widest">
             Email
           </label>
-          <input
-            type="email"
-            className="outline-none border border-slate-300 px-3 py-1 rounded-lg w-[80%]"
-          />
+          <div className="relative">
+            <MdEmail className="absolute left-3 top-2" />
+            <input
+              type="text"
+              placeholder="Johndoe123@gmail.com"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
+            />
+          </div>
           <label htmlFor="" className="font-myFont tracking-widest">
             Password
           </label>
-          <input
-            type="password"
-            className="outline-none border border-slate-300 px-3 py-1 rounded-lg w-[80%]"
-          />
+          <div className="relative">
+            <RiLockPasswordFill className="absolute left-3 top-2" />
+            <input
+              type="password"
+              placeholder="**************"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
+            />
+          </div>
         </form>
 
         <Link
           to="/dashboard"
-          className="mt-3 px-3 py-1.5 bg-black text-white font-bold font-myFont tracking-widest text-center rounded-lg w-[80%]"
+          className="mt-3 px-3 py-1.5 bg-black text-white font-bold font-myFont tracking-widest text-center rounded-lg"
         >
           Sign up
         </Link>
