@@ -15,23 +15,24 @@ const Login = () => {
         <h2 className="font-bold text-xl">Task Management Application</h2>
         <form className="flex flex-col mt-8 gap-2">
           <label htmlFor="" className="font-bold">
-            Email 
+            Email
           </label>
           <input
             type="email"
-            className="outline-none border border-slate-300 px-3 py-1"
+            className="outline-none border border-slate-300 px-3 py-1 rounded-lg"
           />
           <label htmlFor="" className="font-bold">
-            Password 
+            Password
           </label>
           <input
             type="password"
-            className="outline-none border border-slate-300 px-3 py-1"
+            className="outline-none border border-slate-300 px-3 py-1 rounded-lg"
           />
         </form>
 
         <Link to="/signup" className="mt-4">
-          Don't have an account <button className="underline ml-2">Signup</button>
+          Don't have an account
+          <button className="underline ml-2">Signup</button>
         </Link>
       </div>
     </div>
