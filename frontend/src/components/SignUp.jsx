@@ -34,7 +34,7 @@ const SignUp = () => {
         </form>
 
         <Link to="/login" className="mt-4">
-          Already have an account <button className="underline">Login</button>
+          Already have an account <button className="underline ml-2">Login</button>
         </Link>
       </div>
     </div>

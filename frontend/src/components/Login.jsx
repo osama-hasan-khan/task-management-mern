@@ -30,8 +30,8 @@ const Login = () => {
           />
         </form>
 
-        <Link to="/" className="mt-4">
-          Don't have an account <button className="underline">Signup</button>
+        <Link to="/signup" className="mt-4">
+          Don't have an account <button className="underline ml-2">Signup</button>
         </Link>
       </div>
     </div>
