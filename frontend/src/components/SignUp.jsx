@@ -1,41 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import myImage from "../assets/images/isometric-view-san-francisco-s-bridge.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setUserInfo } from "../redux/userSlice";
 
 const SignUp = () => {
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [inputs, setInputs] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSignUp = async () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { userInfo } = useSelector((state) => state.user);
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
     try {
-      const res = await fetch("/api/users/createUser", {
+      const res = await fetch(`http://localhost:4000/api/users/createUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          userName: userName,
-          email: email,
-          password: password,
-        }),
+        body: JSON.stringify(inputs),
       });
 
-      const data = await res.json();
-
-      if (data.error) {
-        toast.error(data.error);
-        return;
-      }
-    } catch (error) {
-      toast.error(error);
+      dispatch(setUserInfo({ ...res }));
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
     }
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/dashboard");
+    }
+  }, [navigate, userInfo]);
 
   return (
     <div className="flex flex-row h-screen justify-between items-center mr-24">
@@ -50,59 +59,51 @@ const SignUp = () => {
           Task Management Application
         </h2>
         <form className="flex flex-col mt-8 gap-2" onSubmit={handleSignUp}>
-          <label htmlFor="" className="font-myFont tracking-widest">
-            Username
-          </label>
+          <label className="font-myFont tracking-widest">Username</label>
           <div className="relative">
             <CiUser className="absolute left-3 top-2" />
             <input
               type="text"
-              name="userName"
-              required
               placeholder="John Doe"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
+              onChange={(e) =>
+                setInputs({ ...inputs, username: e.target.value })
+              }
+              value={inputs.username}
               className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
             />
           </div>
 
-          <label htmlFor="" className="font-myFont tracking-widest">
-            Email
-          </label>
+          <label className="font-myFont tracking-widest">Email</label>
           <div className="relative">
             <MdEmail className="absolute left-3 top-2" />
             <input
-              type="text"
-              name="email"
-              required
+              type="email"
               placeholder="Johndoe123@gmail.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+              value={inputs.email}
               className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
             />
           </div>
-          <label htmlFor="" className="font-myFont tracking-widest">
-            Password
-          </label>
+          <label className="font-myFont tracking-widest">Password</label>
           <div className="relative">
             <RiLockPasswordFill className="absolute left-3 top-2" />
             <input
               type="password"
-              name="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) =>
+                setInputs({ ...inputs, password: e.target.value })
+              }
+              value={inputs.password}
               className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
             />
           </div>
-        </form>
 
-        <Link
-          onClick={handleSignUp}
-          className="mt-3 px-3 py-1.5 bg-black text-white font-bold font-myFont tracking-widest text-center rounded-lg"
-        >
-          Sign up
-        </Link>
+          <button
+            type="submit"
+            className="mt-3 px-3 py-1.5 bg-black text-white font-bold font-myFont tracking-widest text-center rounded-lg"
+          >
+            Signup
+          </button>
+        </form>
 
         <Link to="/login" className="mt-4 font-myFont tracking-widest">
           Already have an account
