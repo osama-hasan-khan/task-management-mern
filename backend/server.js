@@ -9,7 +9,7 @@ import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import userTask from "./routes/userTasksRoutes.js";
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 dotenv.config();
 connectDB();
