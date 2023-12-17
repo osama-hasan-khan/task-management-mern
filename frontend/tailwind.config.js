@@ -4,6 +4,8 @@ export default {
   theme: {
     fontFamily: {
       myFont: ["Bebas Neue"],
+      mySecondFont: ["Pacifico"],
+      myThirdFont: ["Archivo Black"],
     },
     extend: {},
   },
