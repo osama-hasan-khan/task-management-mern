@@ -77,6 +77,26 @@ const logoutCurrentUser = asyncHandler(async (req, res) => {
   }
 });
 
+const getCurrentUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  try {
+    if (user) {
+      res.json({
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+      });
+    } else {
+      res.status(404);
+      throw new Error("User not found.");
+    }
+  } catch (error) {
+    res.status(500).json({ error: err.message });
+    console.log("Error in getCurrentUserProfile: ", err.message);
+  }
+});
+
 const getAllUsers = asyncHandler(async (req, res) => {
   try {
     const users = await User.find({});
@@ -128,4 +148,5 @@ export {
   logoutCurrentUser,
   getAllUsers,
   updateCurrentUserProfile,
+  getCurrentUserProfile,
 };
