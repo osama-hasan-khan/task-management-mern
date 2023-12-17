@@ -1,32 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import myImage from "../assets/images/isometric-view-san-francisco-s-bridge.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { toast } from "react-toastify";
-
-import { useDispatch, useSelector } from "react-redux";
-import { setUserInfo } from "../redux/userSlice";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
-    name: "",
     username: "",
     email: "",
     password: "",
   });
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const { userInfo } = useSelector((state) => state.user);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:4000/api/users/createUser`, {
+      const response = await fetch("/api/users/createUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,17 +26,18 @@ const SignUp = () => {
         body: JSON.stringify(inputs),
       });
 
-      dispatch(setUserInfo({ ...res }));
-    } catch (err) {
-      toast.error(err?.data?.message || err.error);
+      if (!response.ok) {
+        throw new Error("Sign-up failed");
+      }
+
+      const data = await response.json();
+
+      console.log("Sign-up successful:", data);
+      navigate("/login");
+    } catch (error) {
+      console.error("Error during sign-up:", error.message);
     }
   };
-
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/dashboard");
-    }
-  }, [navigate, userInfo]);
 
   return (
     <div className="flex flex-row h-screen justify-between items-center mr-24">
@@ -58,10 +51,11 @@ const SignUp = () => {
         <h2 className="text-2xl font-myFont tracking-widest">
           Task Management Application
         </h2>
+
         <form className="flex flex-col mt-8 gap-2" onSubmit={handleSignUp}>
           <label className="font-myFont tracking-widest">Username</label>
           <div className="relative">
-            <CiUser className="absolute left-3 top-2" />
+            <CiUser className="absolute left-3 top-2.5" />
             <input
               type="text"
               placeholder="John Doe"
@@ -69,31 +63,32 @@ const SignUp = () => {
                 setInputs({ ...inputs, username: e.target.value })
               }
               value={inputs.username}
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-extrabold w-full"
             />
           </div>
 
           <label className="font-myFont tracking-widest">Email</label>
           <div className="relative">
-            <MdEmail className="absolute left-3 top-2" />
+            <MdEmail className="absolute left-3 top-2.5" />
             <input
               type="email"
               placeholder="Johndoe123@gmail.com"
               onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
               value={inputs.email}
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-extrabold w-full"
             />
           </div>
           <label className="font-myFont tracking-widest">Password</label>
           <div className="relative">
-            <RiLockPasswordFill className="absolute left-3 top-2" />
+            <RiLockPasswordFill className="absolute left-3 top-2.5" />
             <input
               type="password"
               onChange={(e) =>
                 setInputs({ ...inputs, password: e.target.value })
               }
               value={inputs.password}
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
+              placeholder="********"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-bold w-full placeholder:font-myFont"
             />
           </div>
 
