@@ -5,6 +5,7 @@ import { CiUser } from "react-icons/ci";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdArrowOutward } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -27,16 +28,16 @@ const SignUp = () => {
         body: JSON.stringify(inputs),
       });
 
-      if (!response.ok) {
-        throw new Error("Sign-up failed");
-      }
-
       const data = await response.json();
+
+      if (!response.ok) {
+        return toast.error(data.error);
+      }
 
       console.log("Sign-up successful:", data);
       navigate("/login");
     } catch (error) {
-      console.error("Error during sign-up:", error.message);
+      toast.error("Error during sign-up:", error.message);
     }
   };
 
@@ -98,7 +99,7 @@ const SignUp = () => {
             className="mt-3 px-3 py-1.5 bg-black text-white font-bold font-myFont tracking-widest text-center rounded-lg flex justify-center gap-2 items-center"
           >
             Signup
-            <MdArrowOutward size={22}  />
+            <MdArrowOutward size={22} />
           </button>
         </form>
 
