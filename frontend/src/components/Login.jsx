@@ -3,6 +3,7 @@ import myImage from "../assets/images/isometric-view-san-francisco-s-ferry-build
 import { Link, useNavigate } from "react-router-dom";
 import { MdArrowOutward, MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -24,17 +25,17 @@ const Login = () => {
         body: JSON.stringify(inputs),
       });
 
-      if (!response.ok) {
-        throw new Error("Sign-up failed");
-      }
-
       const data = await response.json();
+
+      if (!response.ok) {
+        return toast.error(data.error);
+      }
 
       console.log("Login successful:", data);
 
       navigate("/dashboard");
     } catch (error) {
-      console.error("Error during login:", error.message);
+      toast.error("Error during login:", error.message);
     }
   };
 
@@ -53,18 +54,18 @@ const Login = () => {
         <form className="flex flex-col mt-8 gap-2" onSubmit={handleLogin}>
           <label className="font-myFont tracking-widest">Email</label>
           <div className="relative">
-            <MdEmail className="absolute left-3 top-2" />
+            <MdEmail className="absolute left-3 top-2.5" />
             <input
               type="email"
               onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
               value={inputs.email}
               placeholder="Johndoe123@gmail.com"
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-extrabold w-full"
             />
           </div>
           <label className="font-myFont tracking-widest">Password</label>
           <div className="relative">
-            <RiLockPasswordFill className="absolute left-3 top-2" />
+            <RiLockPasswordFill className="absolute left-3 top-2.5" />
             <input
               type="password"
               onChange={(e) =>
@@ -72,7 +73,7 @@ const Login = () => {
               }
               value={inputs.password}
               placeholder="**************"
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-myFont tracking-widest w-full"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-extrabold w-full"
             />
           </div>
           <button

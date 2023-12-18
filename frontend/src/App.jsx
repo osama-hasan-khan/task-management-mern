@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <>
-      <ToastContainer position="top-left" />
+      <ToastContainer position="top-right" />
       <Routes>
         <Route path="/" Component={HomePage} />
         <Route path="/dashboard" element={<Dashboard />} />
