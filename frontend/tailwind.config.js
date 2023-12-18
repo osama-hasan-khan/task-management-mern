@@ -6,6 +6,7 @@ export default {
       myFont: ["Bebas Neue"],
       mySecondFont: ["Pacifico"],
       myThirdFont: ["Archivo Black"],
+      myFourthFont: ["Lobster"],
     },
     extend: {},
   },

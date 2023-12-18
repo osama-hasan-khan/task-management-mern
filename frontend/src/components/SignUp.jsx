@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { MdArrowOutward } from "react-icons/md";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -44,7 +45,7 @@ const SignUp = () => {
       <img
         src={myImage}
         alt="image"
-        className="w-[50%] h-[100%] object-cover"
+        className="w-[50%] h-[100%] object-cover rounded-tr-[100px] rounded-bl-[100px]"
       />
       <div className="flex flex-col justify-center">
         <h1 className="text-7xl font-myFont">Create an account</h1>
@@ -94,15 +95,18 @@ const SignUp = () => {
 
           <button
             type="submit"
-            className="mt-3 px-3 py-1.5 bg-black text-white font-bold font-myFont tracking-widest text-center rounded-lg"
+            className="mt-3 px-3 py-1.5 bg-black text-white font-bold font-myFont tracking-widest text-center rounded-lg flex justify-center gap-2 items-center"
           >
             Signup
+            <MdArrowOutward size={22}  />
           </button>
         </form>
 
         <Link to="/login" className="mt-4 font-myFont tracking-widest">
           Already have an account
-          <button className="underline ml-2 tracking-wider">Login</button>
+          <button className="underline ml-2 tracking-wider text-green-600">
+            Login
+          </button>
         </Link>
       </div>
     </div>

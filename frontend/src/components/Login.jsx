@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import myImage from "../assets/images/isometric-view-san-francisco-s-ferry-building.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import { MdEmail } from "react-icons/md";
+import { MdArrowOutward, MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Login = () => {
@@ -43,7 +43,7 @@ const Login = () => {
       <img
         src={myImage}
         alt="image"
-        className="w-[50%] h-[100%] object-cover"
+        className="w-[50%] h-[100%] object-cover rounded-tr-[100px] rounded-bl-[100px]"
       />
       <div className="flex flex-col justify-center">
         <h1 className="text-7xl font-myFont">Welcome Back</h1>
@@ -77,15 +77,18 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="mt-3 px-3 py-1.5 bg-black text-white font-bold text-center rounded-lg font-myFont tracking-widest"
+            className="mt-3 px-3 py-1.5 bg-black text-white font-bold font-myFont tracking-widest text-center rounded-lg flex justify-center gap-2 items-center"
           >
             Login
+            <MdArrowOutward size={22} />
           </button>
         </form>
 
         <Link to="/signup" className="mt-4 font-myFont tracking-widest">
           Don't have an account
-          <button className="underline ml-2 tracking-wider">Signup</button>
+          <button className="underline ml-2 tracking-wider text-green-600">
+            Signup
+          </button>
         </Link>
       </div>
     </div>
