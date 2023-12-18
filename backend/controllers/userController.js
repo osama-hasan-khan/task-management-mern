@@ -42,21 +42,19 @@ const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
-    if (!user || !isPasswordCorrect)
-      return res.status(400).json({ error: "Invalid email or password" });
-
-    if (isPasswordCorrect) {
-      createToken(res, user._id);
-
-      res.status(200).json({
-        _id: user._id,
-        email: user.email,
-        username: user.username,
-      });
+    if (!user || !isPasswordCorrect) {
+      return res.status(400).json({ error: "Invalid username or password" });
     }
+
+    createToken(res, user._id);
+
+    res.status(200).json({
+      _id: user._id,
+      email: user.email,
+      username: user.username,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
     console.log("Error in loginUser: ", error.message);
