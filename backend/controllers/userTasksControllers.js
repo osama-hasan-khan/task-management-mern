@@ -1,7 +1,6 @@
-import asyncHandler from "../middlewares/asyncHandler.js";
 import UserTaskModel from "../models/userTaskModel.js";
 
-const createTask = asyncHandler(async (req, res) => {
+const createTask = async (req, res) => {
   const { title, description, dueDate, priorityLevel } = req.body;
   const userId = req.user._id;
 
@@ -21,9 +20,9 @@ const createTask = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log(err);
   }
-});
+};
 
-const getAlltasks = asyncHandler(async (req, res) => {
+const getAlltasks = async (req, res) => {
   try {
     const tasks = await UserTaskModel.find().sort({ priority: -1, dueDate: 1 });
     res.json(tasks);
@@ -31,9 +30,9 @@ const getAlltasks = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log(err);
   }
-});
+};
 
-const getTask = asyncHandler(async (req, res) => {
+const getTask = async (req, res) => {
   try {
     const task = await UserTaskModel.findOne({ user: req.user._id });
 
@@ -46,9 +45,9 @@ const getTask = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log(err);
   }
-});
+};
 
-const updateTask = asyncHandler(async (req, res) => {
+const updateTask = async (req, res) => {
   try {
     const taskId = req.params.taskId;
     const userId = req.user._id;
@@ -80,9 +79,9 @@ const updateTask = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log(err);
   }
-});
+};
 
-const deleteTask = asyncHandler(async (req, res) => {
+const deleteTask = async (req, res) => {
   try {
     const taskId = req.params.taskId;
     const userId = req.user._id;
@@ -105,9 +104,9 @@ const deleteTask = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log(err);
   }
-});
+};
 
-const searchUserTask = asyncHandler(async (req, res) => {
+const searchUserTask = async (req, res) => {
   try {
     const searchTerm = req.query.searchTerm || "";
 
@@ -123,7 +122,7 @@ const searchUserTask = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log(err);
   }
-});
+};
 
 export {
   createTask,

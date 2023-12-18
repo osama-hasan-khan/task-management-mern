@@ -1,9 +1,9 @@
 import User from "../models/userModel.js";
-import asyncHandler from "../middlewares/asyncHandler.js";
+
 import bcrypt from "bcryptjs";
 import createToken from "../utils/createToken.js";
 
-const createUser = asyncHandler(async (req, res) => {
+const createUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
@@ -35,16 +35,16 @@ const createUser = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log("Error in signupUser: ", err.message);
   }
-});
+};
 
-const loginUser = asyncHandler(async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
-    if (!user || !isPasswordCorrect) {
+    if (!isPasswordCorrect) {
       return res.status(400).json({ error: "Invalid username or password" });
     }
 
@@ -59,9 +59,9 @@ const loginUser = asyncHandler(async (req, res) => {
     res.status(500).json({ error: error.message });
     console.log("Error in loginUser: ", error.message);
   }
-});
+};
 
-const logoutCurrentUser = asyncHandler(async (req, res) => {
+const logoutCurrentUser = async (req, res) => {
   try {
     res.cookie("jwt", "", {
       httyOnly: true,
@@ -73,9 +73,9 @@ const logoutCurrentUser = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log("Error in logout user: ", err.message);
   }
-});
+};
 
-const getCurrentUserProfile = asyncHandler(async (req, res) => {
+const getCurrentUserProfile = async (req, res) => {
   const user = await User.findById(req.user._id);
 
   try {
@@ -93,9 +93,9 @@ const getCurrentUserProfile = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log("Error in getCurrentUserProfile: ", err.message);
   }
-});
+};
 
-const getAllUsers = asyncHandler(async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({});
     res.json(users);
@@ -103,9 +103,9 @@ const getAllUsers = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log("Error in get all users: ", err.message);
   }
-});
+};
 
-const updateCurrentUserProfile = asyncHandler(async (req, res) => {
+const updateCurrentUserProfile = async (req, res) => {
   try {
     const { email, username, password } = req.body;
     const userId = req.user._id;
@@ -138,7 +138,7 @@ const updateCurrentUserProfile = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
     console.log("Error in update user : ", err.message);
   }
-});
+};
 
 export {
   createUser,
