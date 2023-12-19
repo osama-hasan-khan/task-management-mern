@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { CgProfile } from "react-icons/cg";
 import { CiUser } from "react-icons/ci";
 import { MdArrowOutward, MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Profile = () => {
@@ -19,6 +18,7 @@ const Profile = () => {
 
   const handleUpdateUserProfile = async (e) => {
     e.preventDefault();
+
     try {
       const response = await fetch(`/api/users/updateProfile/${userId}`, {
         method: "PUT",
@@ -31,16 +31,25 @@ const Profile = () => {
       if (!response.ok) {
         return toast.error(data.error);
       }
-
-      console.log("Sign-up successful:", data);
+      
+      navigate("/dashboard");
 
       if (response.ok) {
         return toast.success("profile updated successfully");
       }
-
-      navigate("/dashboard");
     } catch (error) {
       toast.error("Error during updating profile:", error.message);
+    }
+  };
+
+  const handleLogoutUser = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("/api/users/logoutUser");
+    const data = await response.json();
+
+    if (!response.ok) {
+      return toast.error(data.error);
     }
   };
 
@@ -49,7 +58,7 @@ const Profile = () => {
       <h1 className="font-myThirdFont">Personal Information</h1>
 
       <form
-        className="flex flex-col mt-8 gap-2"
+        className="flex flex-col mt-8 gap-2 w-[40%]"
         onSubmit={handleUpdateUserProfile}
       >
         <label className="font-myFont">Username</label>
@@ -93,6 +102,8 @@ const Profile = () => {
           <MdArrowOutward size={22} />
         </button>
       </form>
+
+      <div className="flex"></div>
     </div>
   );
 };
