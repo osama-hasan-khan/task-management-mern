@@ -111,9 +111,15 @@ const getAllUsers = async (req, res) => {
 const updateCurrentUserProfile = async (req, res) => {
   try {
     const { email, username, password } = req.body;
+
+    if (!email || !username || !password) {
+      return res.status(400).json({ error: "Please fill all fields" });
+    }
+
     const userId = req.user._id;
 
     let user = await User.findById(userId);
+
     if (!user) return res.status(400).json({ error: "User not found" });
 
     if (req.params.userId !== userId.toString())
