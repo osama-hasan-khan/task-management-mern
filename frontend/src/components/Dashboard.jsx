@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 
 const Dashboard = () => {
-  const [userProfile, setUserProfile] = useState({});
+  const [userProfile, setUserProfile] = useState("");
 
   useState(() => {
     const fetchProfile = async () => {
