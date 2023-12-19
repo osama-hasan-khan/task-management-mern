@@ -6,6 +6,8 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdArrowOutward } from "react-icons/md";
 import { toast } from "react-toastify";
+import ReactTyped from "react-typed";
+import { IoLogoBuffer } from "react-icons/io";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -46,9 +48,15 @@ const SignUp = () => {
       <img
         src={myImage}
         alt="image"
-        className="w-[50%] h-[100%] object-cover rounded-tr-[100px] rounded-bl-[100px]"
+        className="w-[50%] h-[100%] object-cover"
       />
       <div className="flex flex-col justify-center">
+        <div className="flex flex-row items-center gap-4">
+          <IoLogoBuffer size={52} />
+          <h1 className="font-extrabold font-myFont text-xl tracking-widest text-green-600">
+            <ReactTyped strings={["LeafBoard"]} typeSpeed={350} loop />
+          </h1>
+        </div>
         <h1 className="text-7xl font-myFont">Create an account</h1>
         <h2 className="text-2xl font-myFont tracking-widest">
           Task Management Application

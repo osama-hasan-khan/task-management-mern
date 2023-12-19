@@ -34,8 +34,11 @@ const Dashboard = () => {
       </Link>
 
       <div className="flex items-center justify-evenly gap-4">
-        <Link className="font-myThirdFont">Dashboard</Link>
-        <Link to={`/profile/${userProfile._id}`} className="font-myThirdFont">
+        <Link className="font-myFont tracking-widest">Dashboard</Link>
+        <Link
+          to={`/profile/${userProfile._id}`}
+          className="font-myFont tracking-widest"
+        >
           MyProfile
         </Link>
 
