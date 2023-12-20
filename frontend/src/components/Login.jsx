@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import myImage from "../assets/images/isometric-view-san-francisco-s-ferry-building.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { MdArrowOutward, MdEmail } from "react-icons/md";
@@ -6,6 +6,8 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { toast } from "react-toastify";
 import ReactTyped from "react-typed";
 import { IoLogoBuffer } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, setUser } from "../redux/userSlice";
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -14,6 +16,10 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+
+  const user = useSelector(selectUser);
+
+  const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -35,11 +41,21 @@ const Login = () => {
 
       console.log("Login successful:", data);
 
-      navigate("/dashboard");
+      // navigate("/dashboard");
+
+      if (response.ok) {
+        return toast.success(data.success);
+      }
     } catch (error) {
       toast.error("Error during login:", error.message);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  });
 
   return (
     <div className="flex flex-row h-screen items-center justify-between mr-36">

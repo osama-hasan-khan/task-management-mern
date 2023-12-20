@@ -5,6 +5,8 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AiOutlineLogout } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/userSlice";
 
 const Profile = () => {
   const [inputs, setInputs] = useState({
@@ -15,13 +17,13 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
-  const { userId } = useParams();
+  const user = useSelector(selectUser);
 
   const handleUpdateUserProfile = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`/api/users/updateProfile/${userId}`, {
+      const response = await fetch(`/api/users/updateProfile/${user._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(inputs),

@@ -8,6 +8,8 @@ import { MdArrowOutward } from "react-icons/md";
 import { toast } from "react-toastify";
 import ReactTyped from "react-typed";
 import { IoLogoBuffer } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { setUser, signup } from "../redux/userSlice";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -17,6 +19,8 @@ const SignUp = () => {
   });
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -31,6 +35,8 @@ const SignUp = () => {
       });
 
       const data = await response.json();
+
+      dispatch(setUser(data));
 
       if (!response.ok) {
         return toast.error(data.error);
