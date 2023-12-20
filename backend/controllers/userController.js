@@ -21,6 +21,10 @@ const createUser = async (req, res) => {
     await newUser.save();
 
     if (newUser) {
+      return res.status(200).json({ success: "Sign up successfully" })
+    }
+
+    if (newUser) {
       createToken(res, newUser._id);
 
       res.status(201).json({
@@ -31,6 +35,10 @@ const createUser = async (req, res) => {
     } else {
       res.status(400).json({ error: "Invalid user data" });
     }
+
+
+
+
   } catch (err) {
     res.status(500).json({ error: err.message });
     console.log("Error in signupUser: ", err.message);
@@ -42,6 +50,7 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
+
     const isPasswordCorrect = await bcrypt.compare(
       password,
       user?.password || ""
@@ -52,10 +61,9 @@ const loginUser = async (req, res) => {
     }
 
     if (user && isPasswordCorrect) {
+      createToken(res, user._id);
       return res.status(200).json({ success: "successfully logged in" });
     }
-
-    createToken(res, user._id);
 
     res.status(200).json({
       _id: user._id,

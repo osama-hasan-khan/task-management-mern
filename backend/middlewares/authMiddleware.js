@@ -7,6 +7,8 @@ const authenticate = async (req, res, next) => {
   // Read JWT from the 'jwt' cookie
   token = req.cookies.jwt;
 
+  if (!token) return res.status(401).json({ message: "Unauthorized" });
+
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
