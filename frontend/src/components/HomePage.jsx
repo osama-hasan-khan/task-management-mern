@@ -11,7 +11,7 @@ const HomePage = () => {
           <ReactTyped strings={["LeafBoard"]} typeSpeed={350} loop />
         </h1>
         <h5 className="text-xl font-myFont tracking-widest">
-          A platform built for a new of working
+          A platform built for a new way of working
         </h5>
         <h6 className="font-myFont text-3xl">
           Convenient and productive task manager

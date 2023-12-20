@@ -2,9 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Dashboard from "./components/Dashboard";
 import HomePage from "./components/HomePage";
-import Login from "./components/Login";
-import Profile from "./components/Profile";
-import SignUp from "./components/SignUp";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import SignUp from "./pages/SignUp";
 
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/PrivateRoute";
