@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import myImage from "../assets/images/isometric-view-san-francisco-s-bridge.jpg";
-import { Link, useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
-import { MdEmail } from "react-icons/md";
+import { IoLogoBuffer } from "react-icons/io";
+import { MdArrowOutward, MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { MdArrowOutward } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ReactTyped from "react-typed";
-import { IoLogoBuffer } from "react-icons/io";
-import { useDispatch } from "react-redux";
-import { setUser, signup } from "../redux/userSlice";
+import myImage from "../assets/images/isometric-view-san-francisco-s-bridge.jpg";
+import { setUser } from "../redux/userSlice";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -44,6 +43,10 @@ const SignUp = () => {
 
       console.log("Sign-up successful:", data);
       navigate("/login");
+
+      if (response.ok) {
+        toast.success(data.success);
+      }
     } catch (error) {
       toast.error("Error during sign-up:", error.message);
     }

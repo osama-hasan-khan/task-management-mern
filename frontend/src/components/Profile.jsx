@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { CiUser } from "react-icons/ci";
 import { MdArrowOutward, MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AiOutlineLogout } from "react-icons/ai";
-import { useSelector } from "react-redux";
-import { selectUser } from "../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser, selectUser } from "../redux/userSlice";
 
 const Profile = () => {
   const [inputs, setInputs] = useState({
@@ -16,6 +16,8 @@ const Profile = () => {
   });
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
 
@@ -55,13 +57,15 @@ const Profile = () => {
       });
       const data = await response.json();
 
+      dispatch(clearUser);
+
       if (!response.ok) {
         return toast.error(data.error);
       }
       navigate("/");
 
       if (response.ok) {
-        toast.success("profile logged out successfully");
+        toast.success(data.message);
       }
     } catch (error) {
       toast.error("Error during logout:", error.message);

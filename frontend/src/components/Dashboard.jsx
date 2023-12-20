@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { CgProfile } from "react-icons/cg";
 import { IoLogoBuffer } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
 
 const Dashboard = () => {
   const [userProfile, setUserProfile] = useState("");

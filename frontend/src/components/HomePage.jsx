@@ -1,7 +1,7 @@
 import React from "react";
-import myImage from "../assets/images/home.jpg";
 import { Link } from "react-router-dom";
 import ReactTyped from "react-typed";
+import myImage from "../assets/images/home.jpg";
 
 const HomePage = () => {
   return (
@@ -13,7 +13,9 @@ const HomePage = () => {
         <h5 className="text-xl font-myFont tracking-widest">
           A platform built for a new of working
         </h5>
-        <h6 className="font-myFont text-3xl">Convenient and productive task manager</h6>
+        <h6 className="font-myFont text-3xl">
+          Convenient and productive task manager
+        </h6>
         <Link
           to="/signup"
           className="mt-3 px-3 py-1.5 bg-black text-white text-center rounded-lg font-myFont tracking-widest"
