@@ -47,11 +47,19 @@ const Profile = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/users/logoutUser");
+      const response = await fetch("/api/users/logoutUser", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
       const data = await response.json();
 
       if (!response.ok) {
         return toast.error(data.error);
+      }
+      navigate("/");
+
+      if (response.ok) {
+        toast.success("profile logged out successfully");
       }
     } catch (error) {
       toast.error("Error during logout:", error.message);
@@ -114,10 +122,14 @@ const Profile = () => {
             <MdArrowOutward size={22} />
           </button>
         </form>
-      </div>
-      <div className="flex flex-row items-center">
-        <AiOutlineLogout />
-        <button type="submit">Logout</button>
+        <button
+          type="submit"
+          className="mt-3 px-3 py-1.5 bg-black text-white font-bold font-myFont tracking-widest text-center rounded-lg flex justify-center gap-2 items-center"
+          onClick={handleLogoutUser}
+        >
+          Logout
+          <AiOutlineLogout size={22} />
+        </button>
       </div>
     </div>
   );
