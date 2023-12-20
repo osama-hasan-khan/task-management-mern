@@ -51,6 +51,10 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ error: "Invalid username or password" });
     }
 
+    if (user && isPasswordCorrect) {
+      return res.status(200).json({ success: "successfully logged in" });
+    }
+
     createToken(res, user._id);
 
     res.status(200).json({
