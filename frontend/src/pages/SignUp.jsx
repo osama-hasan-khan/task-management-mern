@@ -53,7 +53,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex flex-row h-screen justify-between items-center mr-24">
+    <div className="flex flex-row h-screen justify-between items-center pr-24">
       <img
         src={myImage}
         alt="image"

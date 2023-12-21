@@ -8,6 +8,8 @@ import SignUp from "./pages/SignUp";
 
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/PrivateRoute";
+import CreateUserTask from "./pages/CreateUserTask";
+import Tasks from "./components/Tasks";
 
 function App() {
   return (
@@ -15,13 +17,16 @@ function App() {
       <ToastContainer position="top-right" />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
 
-        <Route element={<PrivateRoute />}>
+        <Route path="" element={<Dashboard />}>
+          <Route path="/create-task" element={<CreateUserTask />} />
+          <Route path="/tasks" element={<Tasks />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
+
+        <Route element={<PrivateRoute />}></Route>
       </Routes>
     </>
   );

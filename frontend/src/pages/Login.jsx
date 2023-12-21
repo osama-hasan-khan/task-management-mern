@@ -17,8 +17,6 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-
-
   const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
@@ -34,7 +32,7 @@ const Login = () => {
       });
 
       const data = await response.json();
-      
+
       dispatch(setUser(data));
 
       if (!response.ok) {
@@ -43,7 +41,7 @@ const Login = () => {
 
       console.log("Login successful:", data);
 
-      navigate("/dashboard");
+      navigate("/create-task");
 
       if (response.ok) {
         return toast.success(data.success);
@@ -54,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-row h-screen items-center justify-between mr-36">
+    <div className="flex flex-row h-screen items-center justify-between pr-20">
       <img
         src={myImage}
         alt="image"
