@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CiUser } from "react-icons/ci";
+import { FaUser } from "react-icons/fa";
 import { IoLogoBuffer } from "react-icons/io";
 import { MdArrowOutward, MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import ReactTyped from "react-typed";
 import myImage from "../assets/images/isometric-view-san-francisco-s-bridge.jpg";
 import { setUser } from "../redux/userSlice";
-import { FaUser } from "react-icons/fa";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
