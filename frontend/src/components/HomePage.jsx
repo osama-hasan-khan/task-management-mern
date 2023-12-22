@@ -5,8 +5,8 @@ import myImage from "../assets/images/home.jpg";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-row justify-between p-6 h-screen">
-      <div className="flex flex-col gap-3 items-center justify-center">
+    <div className="flex flex-row justify-between h-screen bg-slate-900 text-white">
+      <div className="flex flex-col gap-3 items-center justify-center pl-24">
         <h1 className="font-extrabold font-myFont text-6xl">
           <ReactTyped strings={["LeafBoard"]} typeSpeed={350} loop />
         </h1>
@@ -18,7 +18,7 @@ const HomePage = () => {
         </h6>
         <Link
           to="/signup"
-          className="mt-3 px-3 py-1.5 bg-black text-white text-center rounded-lg font-myFont tracking-widest"
+          className="mt-3 px-3 py-1.5 bg-blue-700 text-white text-center rounded-lg font-myFont tracking-widest"
         >
           Get Started For Free
         </Link>

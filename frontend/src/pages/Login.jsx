@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-row h-screen items-center justify-between pr-20">
+    <div className="flex flex-row h-screen items-center justify-between pr-20 bg-slate-900 text-white">
       <img
         src={myImage}
         alt="image"
@@ -61,7 +61,7 @@ const Login = () => {
       <div className="flex flex-col justify-center">
         <div className="flex flex-row items-center gap-4">
           <IoLogoBuffer size={52} />
-          <h1 className="font-extrabold font-myFont text-xl tracking-widest text-green-600">
+          <h1 className="font-extrabold font-myFont text-xl tracking-widest text-blue-600">
             <ReactTyped strings={["LeafBoard"]} typeSpeed={350} loop />
           </h1>
         </div>
@@ -72,18 +72,18 @@ const Login = () => {
         <form className="flex flex-col mt-8 gap-2" onSubmit={handleLogin}>
           <label className="font-myFont tracking-widest">Email</label>
           <div className="relative">
-            <MdEmail className="absolute left-3 top-2.5" />
+            <MdEmail className="absolute left-3 top-2.5 text-black" />
             <input
               type="email"
               onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
               value={inputs.email}
               placeholder="Johndoe123@gmail.com"
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-extrabold w-full"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-extrabold w-full text-black"
             />
           </div>
           <label className="font-myFont tracking-widest">Password</label>
           <div className="relative">
-            <RiLockPasswordFill className="absolute left-3 top-2.5" />
+            <RiLockPasswordFill className="absolute left-3 top-2.5 text-black" />
             <input
               type="password"
               onChange={(e) =>
@@ -91,12 +91,12 @@ const Login = () => {
               }
               value={inputs.password}
               placeholder="**************"
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-extrabold w-full"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded-lg font-extrabold w-full text-black"
             />
           </div>
           <button
             type="submit"
-            className="mt-3 px-3 py-1.5 bg-black text-white font-bold font-myFont tracking-widest text-center rounded-lg flex justify-center gap-2 items-center"
+            className="mt-3 px-3 py-1.5 bg-blue-700 text-white font-bold font-myFont tracking-widest text-center rounded-lg flex justify-center gap-2 items-center"
           >
             Login
             <MdArrowOutward size={22} />
@@ -105,7 +105,7 @@ const Login = () => {
 
         <Link to="/signup" className="mt-4 font-myFont tracking-widest">
           Don't have an account
-          <button className="underline ml-2 tracking-wider text-green-600">
+          <button className="underline ml-2 tracking-wider text-blue-600">
             Signup
           </button>
         </Link>
