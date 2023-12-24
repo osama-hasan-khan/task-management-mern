@@ -24,10 +24,10 @@ function App() {
         <Route path="" element={<Dashboard />}>
           <Route path="/create-task" element={<CreateUserTask />} />
           <Route path="/tasks" element={<Tasks />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
         </Route>
-
-        <Route element={<PrivateRoute />}></Route>
       </Routes>
     </>
   );

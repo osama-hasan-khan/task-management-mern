@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-row h-screen items-center justify-between pr-20 bg-slate-900 text-white">
+    <div className="flex flex-row h-screen items-center justify-between pr-20 bg-[#0e0d1d] text-white">
       <img
         src={myImage}
         alt="image"

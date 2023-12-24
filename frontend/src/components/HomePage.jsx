@@ -5,7 +5,7 @@ import myImage from "../assets/images/home.jpg";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-row justify-between h-screen bg-slate-900 text-white">
+    <div className="flex flex-row justify-between h-screen bg-[#0e0d1d] text-white">
       <div className="flex flex-col gap-3 items-center justify-center pl-24">
         <h1 className="font-extrabold font-myFont text-6xl">
           <ReactTyped strings={["LeafBoard"]} typeSpeed={350} loop />

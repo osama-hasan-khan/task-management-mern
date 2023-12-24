@@ -18,7 +18,7 @@ const Sidebar = () => {
   const location = useLocation();
 
   return (
-    <div className="w-16 h-screen bg-slate-900 text-white pt-8 flex flex-col items-center gap-y-3">
+    <div className="w-16 h-screen bg-[#0e0d1d] text-white pt-8 flex flex-col items-center gap-y-3">
       <IoLogoBuffer size={52} />
       <div className="flex flex-col gap-y-3 w-full pt-5">
         <span></span>
@@ -33,7 +33,7 @@ const Sidebar = () => {
                 <span
                   className={`text-2xl flex items-center justify-center p-2 ${
                     location.pathname === menu.path
-                      ? "text-blue-600"
+                      ? "text-green-400"
                       : "text-zinc-600"
                   }`}
                 >

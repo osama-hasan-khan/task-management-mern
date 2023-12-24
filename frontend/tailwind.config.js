@@ -7,6 +7,7 @@ export default {
       mySecondFont: ["Pacifico"],
       myThirdFont: ["Archivo Black"],
       myFourthFont: ["Lobster"],
+      myFifthFont: ["Francois One"],
     },
     extend: {},
   },
