@@ -50,6 +50,7 @@ const CreateUserTask = () => {
     description: "",
     dueDate: "",
     priority: "medium",
+    status: "todo",
   });
 
   const navigate = useNavigate();
@@ -84,7 +85,7 @@ const CreateUserTask = () => {
 
   return (
     <div className="flex flex-col">
-      <Link to="/profile">
+      <Link to="/profile" className="flex items-center justify-between">
         <h1 className="font-myFourthFont font-extrabold tracking-widest text-4xl">
           Welcome, {userProfile.username}!
         </h1>
@@ -147,6 +148,26 @@ const CreateUserTask = () => {
             </option>
             <option value="high" className="font-extrabold">
               High
+            </option>
+          </select>
+        </label>
+
+        <label className="relative w-[30%] font-myThirdFont">
+          Status
+          <select
+            name="status"
+            value={inputs.status}
+            onChange={(e) => setInputs({ ...inputs, status: e.target.value })}
+            className="w-full p-2.5 bg-white border border-slate-400 rounded-lg  outline-none appearance-none focus:border-green-600"
+          >
+            <option value="backlog" className="font-extrabold">
+              Backlog
+            </option>
+            <option value="todo" className="font-extrabold">
+              Todo
+            </option>
+            <option value="inprogress" className="font-extrabold">
+              In Progress
             </option>
           </select>
         </label>
