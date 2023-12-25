@@ -1,7 +1,7 @@
 import UserTaskModel from "../models/userTaskModel.js";
 
 const createTask = async (req, res) => {
-  const { title, description, dueDate, priorityLevel } = req.body;
+  const { title, description, dueDate, priorityLevel, status } = req.body;
 
   try {
     const task = await UserTaskModel.create({
@@ -9,10 +9,15 @@ const createTask = async (req, res) => {
       description,
       dueDate,
       priorityLevel,
+      status,
       user: req.user._id,
     });
 
     const savedTask = await task.save();
+
+    if (savedTask) {
+      return res.status(201).json({ success: "successfull task created " });
+    }
 
     res.status(201).json(savedTask);
   } catch (err) {

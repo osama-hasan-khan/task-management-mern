@@ -27,6 +27,12 @@ const taskSchema = new mongoose.Schema({
     enum: ["low", "medium", "high"],
     default: "medium",
   },
+
+  status: {
+    type: String,
+    enum: ["backlog", "todo", "inprogress"],
+    default: "todo",
+  },
 });
 
 const UserTaskModel = mongoose.model("TaskModel", taskSchema);
