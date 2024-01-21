@@ -10,10 +10,10 @@ const HomePage = () => {
         <h1 className="font-extrabold font-myFont text-6xl">
           <ReactTyped strings={["LeafBoard"]} typeSpeed={350} loop />
         </h1>
-        <h5 className="text-xl font-myFont tracking-widest">
+        <h5 className="font-myFont tracking-widest">
           A platform built for a new way of working
         </h5>
-        <h6 className="font-myFont text-3xl">
+        <h6 className="font-myFont text-2xl">
           Convenient and productive task manager
         </h6>
         <Link
@@ -26,7 +26,7 @@ const HomePage = () => {
       <img
         src={myImage}
         alt="image"
-        className="w-[50%] h-[100%] object-cover"
+        className="w-[70%] h-[100%] object-cover"
       />
     </div>
   );
