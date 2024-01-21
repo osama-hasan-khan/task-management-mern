@@ -1,20 +1,29 @@
 import React from "react";
 
 const TaskList = ({ task }) => {
+  const formattedSpecificDate = new Date(task.dueDate)
+    .toISOString()
+    .slice(0, 10);
+
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg mb-4">
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{task.title}</div>
-        <p className="text-gray-700 text-base mb-2">
-          Description: {task.description}
-        </p>
-        <p className="text-gray-700 text-base mb-2">Due Date: {task.dueDate}</p>
-        <p className="text-gray-700 text-base mb-2">
-          Priority: {task.priority}
-        </p>
-        <p className="text-gray-700 text-base mb-2">Status: {task.status}</p>
+    <>
+      <div className="max-w-sm rounded overflow-hidden shadow-2xl mb-4">
+        <div className="px-6 py-4">
+          <div className="text-xl mb-2 font-myFont tracking-wider">
+            {task.title}
+          </div>
+          <p className="text-gray-500 font-myThirdFont tracking-tighter mb-2">
+            {task.description}
+          </p>
+          <p className="text-gray-700 font-myFifthFont mb-2">
+            Due Date: {formattedSpecificDate}
+          </p>
+          <p className="text-gray-500 font-myFifthFont mb-2">
+            Priority: {task.priority}
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

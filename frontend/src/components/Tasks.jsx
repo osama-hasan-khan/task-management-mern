@@ -37,20 +37,25 @@ const Tasks = () => {
   };
 
   return (
-    <div className="flex justify-around p-8">
-      <div>
-        <h2 className="text-2xl font-bold mb-4">Todo</h2>
-        {renderTasksByStatus("todo")}
+    <>
+      <h1 className="font-myFifthFont text-2xl">Tasks</h1>
+      <div className="grid grid-cols-4 justify-items-center p-10">
+        <div>
+          <h2 className="text-2xl font-bold mb-4 font-myFifthFont">Todo</h2>
+          {renderTasksByStatus("todo")}
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold mb-4 font-myFifthFont">
+            In Progress
+          </h2>
+          {renderTasksByStatus("inprogress")}
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold mb-4 font-myFifthFont">Backlog</h2>
+          {renderTasksByStatus("backlog")}
+        </div>
       </div>
-      <div>
-        <h2 className="text-2xl font-bold mb-4">In Progress</h2>
-        {renderTasksByStatus("inprogress")}
-      </div>
-      <div>
-        <h2 className="text-2xl font-bold mb-4">Backlog</h2>
-        {renderTasksByStatus("backlog")}
-      </div>
-    </div>
+    </>
   );
 };
 

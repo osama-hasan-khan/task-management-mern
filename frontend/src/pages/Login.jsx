@@ -56,7 +56,7 @@ const Login = () => {
       <img
         src={myImage}
         alt="image"
-        className="w-[50%] h-[100%] object-cover"
+        className="w-[73%] h-[100%] object-cover"
       />
       <div className="flex flex-col justify-center">
         <div className="flex flex-row items-center gap-4">
