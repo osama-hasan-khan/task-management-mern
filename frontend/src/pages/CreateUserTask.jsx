@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 const CreateUserTask = () => {
   const [userProfile, setUserProfile] = useState("");
-
   const [today, setToday] = useState("");
 
   useEffect(() => {
@@ -49,7 +48,7 @@ const CreateUserTask = () => {
     title: "",
     description: "",
     dueDate: "",
-    priority: "medium",
+    priorityLevel: "",
     status: "todo",
   });
 
@@ -135,9 +134,11 @@ const CreateUserTask = () => {
         <label className="relative w-[30%] font-myThirdFont">
           Priority:
           <select
-            name="priority"
-            value={inputs.priority}
-            onChange={(e) => setInputs({ ...inputs, priority: e.target.value })}
+            name="priorityLevel"
+            value={inputs.priorityLevel}
+            onChange={(e) =>
+              setInputs({ ...inputs, priorityLevel: e.target.value })
+            }
             className="w-full p-2.5 bg-white border border-slate-400 rounded-lg  outline-none appearance-none focus:border-green-600"
           >
             <option value="low" className="font-extrabold">
@@ -168,6 +169,9 @@ const CreateUserTask = () => {
             </option>
             <option value="inprogress" className="font-extrabold">
               In Progress
+            </option>
+            <option value="not started" className="font-extrabold">
+              Not Started
             </option>
           </select>
         </label>

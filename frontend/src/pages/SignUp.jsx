@@ -66,10 +66,10 @@ const SignUp = () => {
             <ReactTyped strings={["LeafBoard"]} typeSpeed={350} loop />
           </h1>
         </div>
-        <h1 className="text-7xl font-myFont">Create an account</h1>
         <h2 className="text-2xl font-myFont tracking-widest">
           Task Management Application
         </h2>
+        <h1 className="text-7xl font-myFont">Create an account</h1>
 
         <form className="flex flex-col mt-8 gap-2" onSubmit={handleSignUp}>
           <label className="font-myFont tracking-widest">Username</label>
