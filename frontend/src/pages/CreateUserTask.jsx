@@ -173,6 +173,9 @@ const CreateUserTask = () => {
             <option value="not started" className="font-extrabold">
               Not Started
             </option>
+            <option value="completed" className="font-extrabold">
+              Completed
+            </option>
           </select>
         </label>
 
