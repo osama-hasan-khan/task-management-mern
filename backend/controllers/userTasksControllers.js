@@ -7,10 +7,10 @@ const createTask = async (req, res) => {
     const task = await UserTaskModel.create({
       title,
       description,
+      user: req.user._id,
       dueDate,
       priorityLevel,
       status,
-      user: req.user._id,
     });
 
     const savedTask = await task.save();
