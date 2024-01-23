@@ -5,6 +5,7 @@ import {
   deleteTask,
   getAlltasks,
   getTask,
+  markAsACompleted,
   searchUserTask,
   updateTask,
 } from "../controllers/userTasksControllers.js";
@@ -17,5 +18,6 @@ router.get("/getTask/:taskId", authenticate, getTask);
 router.put("/updateTask/:taskId", authenticate, updateTask);
 router.delete("/deleteTask/:taskId", authenticate, deleteTask);
 router.get("/searchTask", authenticate, searchUserTask);
+router.put("/markAsACompleted/:taskId", authenticate, markAsACompleted);
 
 export default router;

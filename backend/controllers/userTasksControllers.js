@@ -128,6 +128,25 @@ const searchUserTask = async (req, res) => {
   }
 };
 
+const markAsACompleted = async (req, res) => {
+  const { taskId } = req.params;
+  try {
+    const updatedTask = await UserTaskModel.updateOne(
+      { _id: taskId },
+      { $set: { status: "completed" } }
+    );
+
+    if (!updatedTask) {
+      return res.status(404).json({ error: "Task not found" });
+    }
+
+    res.json(updatedTask);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+    console.log(err);
+  }
+};
+
 export {
   createTask,
   getAlltasks,
@@ -135,4 +154,5 @@ export {
   getTask,
   deleteTask,
   searchUserTask,
+  markAsACompleted,
 };
