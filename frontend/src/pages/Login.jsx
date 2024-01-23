@@ -41,7 +41,7 @@ const Login = () => {
 
       console.log("Login successful:", data);
 
-      navigate("/create-task");
+      navigate("/tasks");
 
       if (response.ok) {
         return toast.success(data.success);

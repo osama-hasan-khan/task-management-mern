@@ -10,10 +10,11 @@ import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/PrivateRoute";
 import CreateUserTask from "./pages/CreateUserTask";
 import Tasks from "./components/Tasks";
+import { Suspense } from "react";
 
 function App() {
   return (
-    <>
+    <Suspense fallback={<div>Loading.....</div>}>
       <ToastContainer position="top-right" />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -29,7 +30,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </>
+    </Suspense>
   );
 }
 
