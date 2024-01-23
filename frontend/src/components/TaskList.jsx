@@ -25,18 +25,18 @@ const TaskList = ({ task }) => {
 
   return (
     <>
-      <div className="max-w-sm rounded overflow-hidden shadow bg-white mb-4">
-        <div className="px-6 py-4">
+      <div className="max-w-xs rounded overflow-hidden shadow bg-white mb-2">
+        <div className="px-3 py-3">
           <div className="mb-2 text-zinc-950 font-myFont tracking-widest">
             {task.title}
           </div>
-          <p className="text-gray-600 tracking-tighter mb-2">
+          <p className="text-gray-600 tracking-tighter mb-1">
             {task.description}
           </p>
-          <p className="text-gray-700 mb-2">
+          <p className="text-gray-700 mb-2 font-myFifthFont">
             Due Date: {formattedSpecificDate}
           </p>
-          <p className="text-gray-800 font-myFifthFont mb-2">
+          <p className="text-gray-800 font-myFifthFont mb-1.5">
             Priority: {task.priorityLevel}
           </p>
 
