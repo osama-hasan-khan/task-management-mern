@@ -140,13 +140,43 @@ const markAsACompleted = async (req, res) => {
       return res.status(404).json({ error: "Task not found" });
     }
 
-    if (updatedTask.status === "completed") {
+    if (updatedTask) {
       return res
         .status(200)
         .json({ message: "Task added to completed status" });
     }
 
     res.json(updatedTask);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+    console.log(err);
+  }
+};
+
+const countEachTasks = async (req, res) => {
+  const backLogCount = await UserTaskModel.countDocuments({
+    status: "backlog",
+  });
+  const toDoCount = await UserTaskModel.countDocuments({ status: "todo" });
+  const inProgressCount = await UserTaskModel.countDocuments({
+    status: "inprogress",
+  });
+  const notStartedCount = await UserTaskModel.countDocuments({
+    status: "not started",
+  });
+  const completedCount = await UserTaskModel.countDocuments({
+    status: "completed",
+  });
+
+  res.json({
+    backlog: backLogCount,
+    todo: toDoCount,
+    inprogress: inProgressCount,
+    notstarted: notStartedCount,
+    completed: completedCount,
+  });
+
+  try {
   } catch (err) {
     res.status(500).json({ err: err.message });
     console.log(err);
@@ -161,4 +191,5 @@ export {
   deleteTask,
   searchUserTask,
   markAsACompleted,
+  countEachTasks,
 };
