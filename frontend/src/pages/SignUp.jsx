@@ -42,7 +42,7 @@ const SignUp = () => {
       }
 
       console.log("Sign-up successful:", data);
-      navigate("/login");
+      navigate("/tasks");
 
       if (response.ok) {
         toast.success(data.success);

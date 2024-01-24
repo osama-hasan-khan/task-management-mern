@@ -174,7 +174,7 @@ const CreateUserTask = () => {
             <option value="inprogress" className="font-mySeventhFont">
               In Progress
             </option>
-            <option value="not started" className="font-mySeventhFont">
+            <option value="notstarted" className="font-mySeventhFont">
               Not Started
             </option>
             <option value="completed" className="font-mySeventhFont">

@@ -90,8 +90,8 @@ const Login = () => {
                 setInputs({ ...inputs, password: e.target.value })
               }
               value={inputs.password}
-              placeholder="**************"
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded placeholder:font-mySixthFont bg-[#FFF5EE] w-full text-black"
+              placeholder="********"
+              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded font-bold bg-[#FFF5EE] font-mySixthFont placeholder:font-mySixthFont w-full text-black"
             />
           </div>
           <button
