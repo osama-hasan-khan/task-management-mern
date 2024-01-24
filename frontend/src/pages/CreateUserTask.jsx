@@ -46,7 +46,7 @@ const CreateUserTask = () => {
     title: "",
     description: "",
     dueDate: new Date(),
-    priorityLevel: "",
+    priorityLevel: "medium",
     status: "todo",
   });
 
@@ -91,35 +91,35 @@ const CreateUserTask = () => {
         </p>
       </Link> */}
 
-      <h1 className="font-mySixthFont text-2xl font-bold">Create Your Task</h1>
+      <h1 className="font-mySixthFont text-xl font-bold">Create Your Task</h1>
 
       <form
         className="flex flex-col gap-3 w-[80%]"
         onSubmit={handleTaskCreationSubmit}
       >
-        <label className="font-myThirdFont">Title of task</label>
+        <label className="font-mySixthFont">Title of task</label>
         <input
           type="text"
           placeholder="Design ui/ux for web"
-          className="border-slate-400 border outline-none px-2 py-1 rounded placeholder:font-mySixthFont font-bold"
+          className="border border-black outline-none px-2 py-1 rounded placeholder:font-mySixthFont w-[50%]"
           onChange={(e) => setInputs({ ...inputs, title: e.target.value })}
           value={inputs.title}
         />
 
-        <label className="font-myThirdFont">Description of task</label>
+        <label className="font-mySixthFont">Description of task</label>
 
         <textarea
           type="text"
           rows="5"
           placeholder="A description of task"
-          className="border-slate-400 border outline-none px-2 py-1 rounded placeholder:font-mySixthFont font-bold"
+          className="border border-black outline-none px-2 py-1 rounded placeholder:font-mySixthFont w-[60%]"
           onChange={(e) =>
             setInputs({ ...inputs, description: e.target.value })
           }
           value={inputs.description}
         />
 
-        <label className="font-myThirdFont">Due Date of task</label>
+        <label className="font-mySixthFont">Due Date of task</label>
 
         {/* <input
           type="date"
@@ -131,11 +131,11 @@ const CreateUserTask = () => {
         <DatePicker
           selected={inputs.dueDate}
           onChange={(date) => setInputs({ ...inputs, dueDate: date })}
-          className="border-slate-400 border outline-none px-2 py-1 rounded placeholder:font-mySecondFont font-bold focus:border-green-600"
+          className="border border-black outline-none px-2 py-1 rounded placeholder:font-mySeventhFont w-[12%]"
           type="date"
         />
 
-        <label className="relative w-[30%] font-myThirdFont">
+        <label className="relative w-[10%] font-mySixthFont">
           Priority:
           <select
             name="priorityLevel"
@@ -143,41 +143,41 @@ const CreateUserTask = () => {
             onChange={(e) =>
               setInputs({ ...inputs, priorityLevel: e.target.value })
             }
-            className="w-full p-2.5 bg-white border border-slate-400 rounded  outline-none appearance-none focus:border-green-600"
+            className="w-full p-2 bg-white border border-black rounded outline-none appearance-none"
           >
-            <option value="low" className="font-extrabold">
+            <option value="low" className="font-mySeventhFont">
               Low
             </option>
-            <option value="medium" className="font-extrabold">
+            <option value="medium" className="font-mySeventhFont">
               Medium
             </option>
-            <option value="high" className="font-extrabold">
+            <option value="high" className="font-mySeventhFont">
               High
             </option>
           </select>
         </label>
 
-        <label className="relative w-[30%] font-myThirdFont">
+        <label className="relative w-[10%] font-mySixthFont">
           Status
           <select
             name="status"
             value={inputs.status}
             onChange={(e) => setInputs({ ...inputs, status: e.target.value })}
-            className="w-full p-2.5 bg-white border border-slate-400 rounded  outline-none appearance-none focus:border-green-600"
+            className="w-full p-2 bg-white border border-black rounded outline-none appearance-none"
           >
-            <option value="backlog" className="font-extrabold">
+            <option value="backlog" className="font-mySeventhFont">
               Backlog
             </option>
-            <option value="todo" className="font-extrabold">
+            <option value="todo" className="font-mySeventhFont">
               Todo
             </option>
-            <option value="inprogress" className="font-extrabold">
+            <option value="inprogress" className="font-mySeventhFont">
               In Progress
             </option>
-            <option value="not started" className="font-extrabold">
+            <option value="not started" className="font-mySeventhFont">
               Not Started
             </option>
-            <option value="completed" className="font-extrabold">
+            <option value="completed" className="font-mySeventhFont">
               Completed
             </option>
           </select>
@@ -185,10 +185,10 @@ const CreateUserTask = () => {
 
         <button
           type="submit"
-          className="mt-3 px-3 py-1.5 w-[30%] bg-green-600 text-white font-bold font-mySixthFont tracking-widest text-center rounded flex justify-center gap-2 items-center"
+          className="mt-2 py-1.5 w-[12%] bg-cyan-700 text-white font-mySixthFont text-center rounded flex justify-center gap-1 items-center"
         >
           Create Task
-          <MdArrowOutward size={22} />
+          <MdArrowOutward size={20} />
         </button>
       </form>
     </div>

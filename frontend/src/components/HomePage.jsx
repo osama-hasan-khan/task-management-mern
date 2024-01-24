@@ -5,20 +5,20 @@ import myImage from "../assets/images/home.jpg";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-row justify-between h-screen bg-[#0e0d1d] text-white">
+    <div className="flex flex-row justify-between h-screen">
       <div className="flex flex-col gap-3 items-center justify-center pl-24">
-        <h1 className="font-extrabold font-myFont text-6xl">
+        <h1 className="font-extrabold font-myFont text-4xl">
           <ReactTyped strings={["LeafBoard"]} typeSpeed={350} loop />
         </h1>
         <h5 className="font-myFont tracking-widest">
           A platform built for a new way of working
         </h5>
-        <h6 className="font-myFont text-2xl">
+        <h6 className="font-myFont text-xl">
           Convenient and productive task manager
         </h6>
         <Link
           to="/signup"
-          className="mt-3 px-3 py-1.5 bg-blue-700 text-white text-center rounded-lg font-myFont tracking-widest"
+          className="mt-3 px-3 py-1.5 bg-blue-700 text-white text-center rounded font-myFont tracking-widest"
         >
           Get Started For Free
         </Link>
