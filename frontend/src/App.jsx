@@ -1,20 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/Dashboard";
 import HomePage from "./components/HomePage";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 
-import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/PrivateRoute";
-import CreateUserTask from "./pages/CreateUserTask";
 import Tasks from "./components/Tasks";
-import { Suspense } from "react";
+import CreateUserTask from "./pages/CreateUserTask";
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading.....</div>}>
+    <>
       <ToastContainer position="top-right" />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -30,7 +29,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </Suspense>
+    </>
   );
 }
 

@@ -27,7 +27,7 @@ const TaskList = ({ task }) => {
     <>
       <div className="max-w-xs rounded overflow-hidden shadow bg-white mb-2">
         <div className="px-3 py-3">
-          <div className="mb-2 text-zinc-950 font-myFont tracking-widest">
+          <div className="text-zinc-950 font-myFont tracking-widest">
             {task.title}
           </div>
           <p className="text-gray-600 tracking-tighter mb-1">

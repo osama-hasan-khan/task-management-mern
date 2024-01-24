@@ -19,7 +19,7 @@ const Sidebar = () => {
   const location = useLocation();
 
   return (
-    <div className="w-32 h-screen bg-[#0e0d1d] text-white pt-8 flex flex-col items-center gap-y-3">
+    <div className="w-32 h-screen bg-black text-white pt-8 flex flex-col items-center gap-y-3">
       <IoLogoBuffer size={52} />
       <div className="flex flex-col gap-y-3 w-full pt-5">
         {Menus.map((menu, index) => {
@@ -33,8 +33,8 @@ const Sidebar = () => {
                 <span
                   className={`flex items-center gap-1 p-2 ${
                     location.pathname === menu.path
-                      ? "text-green-400"
-                      : "text-zinc-600"
+                      ? "text-green-300"
+                      : "text-zinc-400"
                   }`}
                 >
                   <span className="text-xl">{menu.icon}</span>

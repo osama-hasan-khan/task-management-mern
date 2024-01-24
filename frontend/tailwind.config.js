@@ -8,6 +8,8 @@ export default {
       myThirdFont: ["Archivo Black"],
       myFourthFont: ["Lobster"],
       myFifthFont: ["Francois One"],
+      mySixthFont: ["Heebo"],
+      mySeventhFont: ["Arimo"],
     },
     extend: {},
   },
