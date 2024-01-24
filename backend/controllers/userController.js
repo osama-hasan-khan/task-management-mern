@@ -21,12 +21,11 @@ const createUser = async (req, res) => {
     await newUser.save();
 
     if (newUser) {
-      return res.status(200).json({ success: "Sign up successfully" })
+      createToken(res, newUser._id);
+      return res.status(200).json({ success: "Sign up successfully" });
     }
 
     if (newUser) {
-      createToken(res, newUser._id);
-
       res.status(201).json({
         _id: newUser._id,
         email: newUser.email,
@@ -35,10 +34,6 @@ const createUser = async (req, res) => {
     } else {
       res.status(400).json({ error: "Invalid user data" });
     }
-
-
-
-
   } catch (err) {
     res.status(500).json({ error: err.message });
     console.log("Error in signupUser: ", err.message);

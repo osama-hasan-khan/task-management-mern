@@ -7,10 +7,10 @@ const createTask = async (req, res) => {
     const task = await UserTaskModel.create({
       title,
       description,
-      user: req.user._id,
       dueDate,
       priorityLevel,
       status,
+      user: req.user._id,
     });
 
     const savedTask = await task.save();
@@ -138,6 +138,12 @@ const markAsACompleted = async (req, res) => {
 
     if (!updatedTask) {
       return res.status(404).json({ error: "Task not found" });
+    }
+
+    if (updatedTask.status === "completed") {
+      return res
+        .status(200)
+        .json({ message: "Task added to completed status" });
     }
 
     res.json(updatedTask);
