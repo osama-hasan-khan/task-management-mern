@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/Dashboard";
@@ -6,10 +6,10 @@ import HomePage from "./components/HomePage";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
-
 import PrivateRoute from "./components/PrivateRoute";
 import Tasks from "./components/Tasks";
 import CreateUserTask from "./pages/CreateUserTask";
+import WorkSpace from "./pages/WorkSpace";
 
 function App() {
   return (
@@ -17,10 +17,9 @@ function App() {
       <ToastContainer position="top-right" />
       <Routes>
         <Route path="/" element={<HomePage />} />
-
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-
+        <Route path="/workspace" element={<WorkSpace />} />
         <Route path="" element={<Dashboard />}>
           <Route path="/create-task" element={<CreateUserTask />} />
           <Route path="/tasks" element={<Tasks />} />

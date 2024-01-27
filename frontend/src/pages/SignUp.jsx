@@ -35,17 +35,18 @@ const SignUp = () => {
 
       const data = await response.json();
 
+      localStorage.setItem("user", JSON.stringify(data));
+
       dispatch(setUser(data));
 
       if (!response.ok) {
         return toast.error(data.error);
       }
 
-      console.log("Sign-up successful:", data);
       navigate("/tasks");
 
       if (response.ok) {
-        toast.success(data.success);
+        toast.success("Signup Successfully");
       }
     } catch (error) {
       toast.error("Error during sign-up:", error.message);

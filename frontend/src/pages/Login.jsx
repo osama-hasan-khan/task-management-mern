@@ -33,13 +33,13 @@ const Login = () => {
 
       const data = await response.json();
 
+      localStorage.setItem("user", JSON.stringify(data));
+
       dispatch(setUser(data));
 
       if (!response.ok) {
         return toast.error(data.error);
       }
-
-      console.log("Login successful:", data);
 
       navigate("/tasks");
 
