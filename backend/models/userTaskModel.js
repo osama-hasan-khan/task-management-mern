@@ -33,6 +33,11 @@ const taskSchema = new mongoose.Schema({
     enum: ["backlog", "todo", "inprogress", "notstarted", "completed"],
     default: "todo",
   },
+
+  workspace: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Workspace",
+  },
 });
 
 const UserTaskModel = mongoose.model("TaskModel", taskSchema);

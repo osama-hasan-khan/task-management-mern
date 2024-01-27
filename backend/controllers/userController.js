@@ -22,10 +22,6 @@ const createUser = async (req, res) => {
 
     if (newUser) {
       createToken(res, newUser._id);
-      return res.status(200).json({ success: "Sign up successfully" });
-    }
-
-    if (newUser) {
       res.status(201).json({
         _id: newUser._id,
         email: newUser.email,
@@ -55,10 +51,7 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ error: "Invalid username or password" });
     }
 
-    if (user && isPasswordCorrect) {
-      createToken(res, user._id);
-      return res.status(200).json({ success: "successfully logged in" });
-    }
+    createToken(res, user._id);
 
     res.status(200).json({
       _id: user._id,
@@ -116,20 +109,19 @@ const getAllUsers = async (req, res) => {
 };
 
 const updateCurrentUserProfile = async (req, res) => {
+  const { username, email, password } = req.body;
+
+  if (!email || !username || !password) {
+    return res.status(400).json({ error: "Please fill all fields" });
+  }
+
   try {
-    const { email, username, password } = req.body;
-
-    if (!email || !username || !password) {
-      return res.status(400).json({ error: "Please fill all fields" });
-    }
-
-    const userId = req.user._id;
-
-    let user = await User.findById(userId);
+    const currenrUserId = req.user._id;
+    let user = await User.findById(currenrUserId);
 
     if (!user) return res.status(400).json({ error: "User not found" });
 
-    if (req.params.userId !== userId.toString())
+    if (req.params.userId !== currenrUserId.toString())
       return res
         .status(400)
         .json({ error: "You cannot update other user's profile" });
