@@ -10,6 +10,9 @@ export default {
       myFifthFont: ["Francois One"],
       mySixthFont: ["Heebo"],
       mySeventhFont: ["Arimo"],
+      myEighthFont: ["Passion One"],
+      myNinthFont: ["Luckiest Guy"],
+      myTenthFont:["Rubik Mono One"]
     },
     extend: {},
   },

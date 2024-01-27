@@ -5,7 +5,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser, selectUser, setUser } from "../redux/userSlice";
+import { selectUser, setUser } from "../redux/userSlice";
 
 const Profile = () => {
   const [inputs, setInputs] = useState({
@@ -18,7 +18,6 @@ const Profile = () => {
 
   const dispatch = useDispatch();
 
-  // const { userInfo } = useSelector((state) => state.user);
   const user = useSelector(selectUser);
 
   console.log(user);
@@ -50,30 +49,6 @@ const Profile = () => {
       }
     } catch (error) {
       toast.error("Error during updating profile:", error.message);
-    }
-  };
-
-  const handleLogoutUser = async () => {
-    try {
-      const response = await fetch("/api/users/logoutUser", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await response.json();
-
-      localStorage.removeItem("user");
-
-      dispatch(logoutUser());
-
-      if (!response.ok) {
-        return toast.error(data.error);
-      }
-
-      if (response.ok) {
-        toast.success(data.message);
-      }
-    } catch (error) {
-      toast.error("Error during logout:", error.message);
     }
   };
 
@@ -143,14 +118,6 @@ const Profile = () => {
             Save Changes
           </button>
         </form>
-
-        <button
-          type="submit"
-          className="mt-3 px-3 py-1.5 bg-black text-white font-myFifthFont rounded-md w-[40%]"
-          onClick={handleLogoutUser}
-        >
-          Logout
-        </button>
       </div>
     </div>
   );

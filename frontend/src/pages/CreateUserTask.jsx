@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { MdArrowOutward } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const CreateUserTask = () => {
-  const [userProfile, setUserProfile] = useState("");
   const [today, setToday] = useState("");
 
   useEffect(() => {
@@ -21,26 +20,6 @@ const CreateUserTask = () => {
     }`;
 
     setToday(formattedDate);
-  }, []);
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await fetch("/api/users/getProfile");
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch profile");
-        }
-        
-        const data = await response.json();
-
-        setUserProfile(data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
-    fetchProfile();
   }, []);
 
   const [inputs, setInputs] = useState({
@@ -84,14 +63,6 @@ const CreateUserTask = () => {
   return (
     <div className="flex flex-col">
       <h1 className="font-mySixthFont text-xl font-bold">Create Your Task</h1>
-      <Link to="/profile" className="flex items-center justify-between">
-        <h1 className="font-myFifthFont tracking-widest text-4xl">
-          Welcome, {userProfile.username}!
-        </h1>
-        <p className="font-myFont tracking-widest text-xl">
-          {userProfile.email}
-        </p>
-      </Link>
 
       <form
         className="flex flex-col gap-3 w-[80%]"
