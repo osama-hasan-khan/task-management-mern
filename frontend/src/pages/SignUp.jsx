@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import { FaUser } from "react-icons/fa";
-import { IoLogoBuffer } from "react-icons/io";
-import { MdArrowOutward, MdEmail } from "react-icons/md";
-import { RiLockPasswordFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import ReactTyped from "react-typed";
-import myImage from "../assets/images/isometric-view-san-francisco-s-bridge.jpg";
+import myImage from "../assets/images/sign-up.png";
 import { setUser } from "../redux/userSlice";
 
 const SignUp = () => {
@@ -35,8 +30,6 @@ const SignUp = () => {
 
       const data = await response.json();
 
-      localStorage.setItem("user", JSON.stringify(data));
-
       dispatch(setUser(data));
 
       if (!response.ok) {
@@ -54,28 +47,20 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex flex-row h-screen justify-between items-center pr-24 bg-[#F9F6EE] text-[#343434]">
-      <img
-        src={myImage}
-        alt="image"
-        className="w-[80%] h-[100%] object-cover"
-      />
-      <div className="flex flex-col justify-center">
-        <div className="flex flex-row items-center gap-4">
-          <IoLogoBuffer size={52} />
-          <h1 className="font-extrabold font-myFont text-xl tracking-widest text-[#581845]">
-            <ReactTyped strings={["LeafBoard"]} typeSpeed={350} loop />
+    <>
+      <h1>Frame</h1>
+      <div className="flex flex-row h-screen justify-around items-center">
+        <div className="flex flex-col justify-center">
+          <h1 className="text-4xl font-myTwelthFont text-black">
+            Create Account
           </h1>
-        </div>
-        <h2 className="text-xl font-myFont tracking-widest">
-          Task Management Application
-        </h2>
-        <h1 className="text-4xl font-myFont">Create an account</h1>
+          <h1 className="font-myTwelthFont text-slate-500 mt-1.5">
+            Get started on the journey of tasks management
+          </h1>
 
-        <form className="flex flex-col mt-8 gap-2" onSubmit={handleSignUp}>
-          <label className="font-myFont tracking-widest">Username</label>
-          <div className="relative">
-            <FaUser className="absolute left-3 top-2 text-black" />
+          <form className="flex flex-col mt-8" onSubmit={handleSignUp}>
+            <label className="font-myTwelthFont text-zinc-500 text-[13px]">Username</label>
+
             <input
               type="text"
               placeholder="John Doe"
@@ -83,52 +68,55 @@ const SignUp = () => {
                 setInputs({ ...inputs, username: e.target.value })
               }
               value={inputs.username}
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded bg-[#FFF5EE] font-mySixthFont placeholder:font-mySixthFont w-full text-black"
+              className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black"
             />
-          </div>
 
-          <label className="font-myFont tracking-widest">Email</label>
-          <div className="relative">
-            <MdEmail className="absolute left-3 top-2 text-black" />
+            <label className="font-myTwelthFont text-zinc-500 mt-3 text-[13px]">
+              Email
+            </label>
+
             <input
               type="email"
-              placeholder="Johndoe123@gmail.com"
+              placeholder="Johndoe@gmail.com"
               onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
               value={inputs.email}
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded bg-[#FFF5EE] font-mySixthFont placeholder:font-mySixthFont w-full text-black"
+              className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black"
             />
-          </div>
-          <label className="font-myFont tracking-widest">Password</label>
-          <div className="relative">
-            <RiLockPasswordFill className="absolute left-3 top-2 text-black" />
+
+            <label className="font-myTwelthFont text-zinc-500 mt-2 text-[13px]">
+              Password
+            </label>
+
             <input
               type="password"
               onChange={(e) =>
                 setInputs({ ...inputs, password: e.target.value })
               }
               value={inputs.password}
-              placeholder="********"
-              className="outline-none border pl-8 border-slate-300 px-3 py-1 rounded font-bold bg-[#FFF5EE] font-mySixthFont placeholder:font-mySixthFont w-full text-black"
+              placeholder="your password"
+              className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black"
             />
-          </div>
 
-          <button
-            type="submit"
-            className="mt-3 px-3 py-1.5 bg-[#343434] text-white font-bold font-myFont tracking-widest text-center rounded flex justify-center gap-2 items-center"
-          >
-            Signup
-            <MdArrowOutward size={22} />
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="mt-4 px-3 py-2.5 bg-[#343434] text-white font-myTwelthFont text-center rounded-lg w-[90%] font-extralight"
+            >
+              Continue with Email
+            </button>
+          </form>
 
-        <Link to="/login" className="mt-4 font-myFont tracking-widest">
-          Already have an account
-          <button className="underline ml-2 tracking-wider text-blue-600">
-            Login
-          </button>
-        </Link>
+          <Link to="/login" className="mt-4 font-myTwelthFont text-slate-600 text-[14px]">
+            Already have an account?
+            <button className="underline ml-2  text-[#48abd6]">Login</button>
+          </Link>
+        </div>
+        <img
+          src={myImage}
+          alt="image"
+          className="w-[40%] h-[100%%] object-contain"
+        />
       </div>
-    </div>
+    </>
   );
 };
 

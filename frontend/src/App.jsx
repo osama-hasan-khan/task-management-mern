@@ -1,4 +1,4 @@
-import { Route, Routes, } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/Dashboard";
@@ -10,8 +10,12 @@ import PrivateRoute from "./components/PrivateRoute";
 import Tasks from "./components/Tasks";
 import CreateUserTask from "./pages/CreateUserTask";
 import WorkSpace from "./pages/WorkSpace";
+import { useSelector } from "react-redux";
+import { selectUser } from "./redux/userSlice";
 
 function App() {
+  const user = useSelector(selectUser);
+
   return (
     <>
       <ToastContainer position="top-right" />
@@ -20,7 +24,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/workspace" element={<WorkSpace />} />
-        <Route path="" element={<Dashboard />}>
+        <Route element={<Dashboard />}>
           <Route path="/create-task" element={<CreateUserTask />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route element={<PrivateRoute />}>

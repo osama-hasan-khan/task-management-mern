@@ -12,7 +12,9 @@ export default {
       mySeventhFont: ["Arimo"],
       myEighthFont: ["Passion One"],
       myNinthFont: ["Luckiest Guy"],
-      myTenthFont:["Rubik Mono One"]
+      myTenthFont: ["Rubik Mono One"],
+      myEleventhFont: ["Fira Sans"],
+      myTwelthFont: ["Inter"],
     },
     extend: {},
   },

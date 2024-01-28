@@ -33,8 +33,6 @@ const Login = () => {
 
       const data = await response.json();
 
-      localStorage.setItem("user", JSON.stringify(data));
-
       dispatch(setUser(data));
 
       if (!response.ok) {
