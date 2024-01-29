@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/workspace" element={<WorkSpace />} />
+        <Route path="/workspace-creation" element={<WorkSpace />} />
         <Route element={<Dashboard />}>
           <Route path="/create-task" element={<CreateUserTask />} />
           <Route path="/tasks" element={<Tasks />} />

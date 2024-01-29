@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import myImage from "../assets/images/sign-up.png";
 import { setUser } from "../redux/userSlice";
 import Logo from "../assets/images/logo.png";
+import AuthLoading from "../components/AuthLoading";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -13,12 +14,16 @@ const SignUp = () => {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
 
     try {
       const response = await fetch("/api/users/createUser", {
@@ -37,13 +42,15 @@ const SignUp = () => {
         return toast.error(data.error);
       }
 
-      navigate("/tasks");
+      navigate("/workapce-creation");
 
       if (response.ok) {
         toast.success("Signup Successfully");
       }
     } catch (error) {
       toast.error("Error during sign-up:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,71 +61,81 @@ const SignUp = () => {
         <h1 className="font-myTwelthFont text-2xl">SaaSForge</h1>
       </Link>
       <div className="flex flex-row h-screen justify-around items-center">
-        <div className="flex flex-col justify-center">
-          <h1 className="text-4xl font-myTwelthFont text-black">
-            Create Account
-          </h1>
-          <h1 className="font-myTwelthFont text-slate-500 mt-1.5">
-            Get started on the journey of tasks management
-          </h1>
+        {loading ? (
+          <>
+            <AuthLoading />
+          </>
+        ) : (
+          <div className="flex flex-col justify-center">
+            <h1 className="text-4xl font-myTwelthFont text-black">
+              Create Account
+            </h1>
+            <h1 className="font-myTwelthFont text-slate-500 mt-1.5">
+              Get started on the journey of tasks management
+            </h1>
 
-          <form className="flex flex-col mt-8" onSubmit={handleSignUp}>
-            <label className="font-myTwelthFont text-zinc-500 text-[13px]">
-              Username
-            </label>
+            <>
+              <form className="flex flex-col mt-8" onSubmit={handleSignUp}>
+                <label className="font-myTwelthFont text-zinc-500 text-[13px]">
+                  Username
+                </label>
 
-            <input
-              type="text"
-              placeholder="John Doe"
-              onChange={(e) =>
-                setInputs({ ...inputs, username: e.target.value })
-              }
-              value={inputs.username}
-              className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black"
-            />
+                <input
+                  type="text"
+                  placeholder="John Doe"
+                  onChange={(e) =>
+                    setInputs({ ...inputs, username: e.target.value })
+                  }
+                  value={inputs.username}
+                  className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black"
+                />
 
-            <label className="font-myTwelthFont text-zinc-500 mt-3 text-[13px]">
-              Email
-            </label>
+                <label className="font-myTwelthFont text-zinc-500 mt-3 text-[13px]">
+                  Email
+                </label>
 
-            <input
-              type="email"
-              placeholder="Johndoe@gmail.com"
-              onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
-              value={inputs.email}
-              className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black"
-            />
+                <input
+                  type="email"
+                  placeholder="Johndoe@gmail.com"
+                  onChange={(e) =>
+                    setInputs({ ...inputs, email: e.target.value })
+                  }
+                  value={inputs.email}
+                  className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black"
+                />
 
-            <label className="font-myTwelthFont text-zinc-500 mt-2 text-[13px]">
-              Password
-            </label>
+                <label className="font-myTwelthFont text-zinc-500 mt-2 text-[13px]">
+                  Password
+                </label>
 
-            <input
-              type="password"
-              onChange={(e) =>
-                setInputs({ ...inputs, password: e.target.value })
-              }
-              value={inputs.password}
-              placeholder="your password"
-              className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black"
-            />
+                <input
+                  type="password"
+                  onChange={(e) =>
+                    setInputs({ ...inputs, password: e.target.value })
+                  }
+                  value={inputs.password}
+                  placeholder="your password"
+                  className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black"
+                />
 
-            <button
-              type="submit"
-              className="mt-4 px-3 py-2.5 bg-[#343434] text-white font-myTwelthFont text-center rounded-lg w-[90%] font-extralight"
+                <button
+                  type="submit"
+                  className="mt-4 px-3 py-2.5 bg-[#343434] text-white font-myTwelthFont text-center rounded-lg w-[90%] font-extralight"
+                >
+                  Continue with Email
+                </button>
+              </form>
+            </>
+
+            <Link
+              to="/login"
+              className="mt-4 font-myTwelthFont text-slate-600 text-[14px]"
             >
-              Continue with Email
-            </button>
-          </form>
-
-          <Link
-            to="/login"
-            className="mt-4 font-myTwelthFont text-slate-600 text-[14px]"
-          >
-            Already have an account?
-            <button className="underline ml-2 text-[#48abd6]">Login</button>
-          </Link>
-        </div>
+              Already have an account?
+              <button className="underline ml-2 text-[#48abd6]">Login</button>
+            </Link>
+          </div>
+        )}
         <img
           src={myImage}
           alt="image"
