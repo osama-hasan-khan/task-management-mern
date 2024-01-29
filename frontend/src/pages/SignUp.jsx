@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import myImage from "../assets/images/sign-up.png";
 import { setUser } from "../redux/userSlice";
+import Logo from "../assets/images/logo.png";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -48,7 +49,10 @@ const SignUp = () => {
 
   return (
     <>
-      <h1>Frame</h1>
+      <Link to="/" className="flex items-center gap-2 p-5">
+        <img src={Logo} alt="logo" className="w-6 h-6" />
+        <h1 className="font-myTwelthFont text-2xl">SaaSForge</h1>
+      </Link>
       <div className="flex flex-row h-screen justify-around items-center">
         <div className="flex flex-col justify-center">
           <h1 className="text-4xl font-myTwelthFont text-black">
@@ -59,7 +63,9 @@ const SignUp = () => {
           </h1>
 
           <form className="flex flex-col mt-8" onSubmit={handleSignUp}>
-            <label className="font-myTwelthFont text-zinc-500 text-[13px]">Username</label>
+            <label className="font-myTwelthFont text-zinc-500 text-[13px]">
+              Username
+            </label>
 
             <input
               type="text"
@@ -105,9 +111,12 @@ const SignUp = () => {
             </button>
           </form>
 
-          <Link to="/login" className="mt-4 font-myTwelthFont text-slate-600 text-[14px]">
+          <Link
+            to="/login"
+            className="mt-4 font-myTwelthFont text-slate-600 text-[14px]"
+          >
             Already have an account?
-            <button className="underline ml-2  text-[#48abd6]">Login</button>
+            <button className="underline ml-2 text-[#48abd6]">Login</button>
           </Link>
         </div>
         <img
