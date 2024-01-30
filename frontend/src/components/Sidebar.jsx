@@ -40,7 +40,7 @@ const Sidebar = () => {
 
         setUserProfile(data);
       } catch (error) {
-        console.log(error.message);
+        toast.error("Error during logout:", error.message);
       }
     };
 
@@ -55,8 +55,6 @@ const Sidebar = () => {
       });
       const data = await response.json();
 
-      localStorage.removeItem("user");
-
       dispatch(logoutUser());
 
       if (!response.ok) {
@@ -67,7 +65,7 @@ const Sidebar = () => {
         toast.success(data.message);
       }
 
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       toast.error("Error during logout:", error.message);
     }

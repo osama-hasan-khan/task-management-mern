@@ -15,7 +15,9 @@ export default {
       myTenthFont: ["Rubik Mono One"],
       myEleventhFont: ["Fira Sans"],
       myTwelthFont: ["Inter"],
+      myFourteenthFont: ["Noto Sans"],
     },
+
     extend: {},
   },
   plugins: [],
