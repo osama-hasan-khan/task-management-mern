@@ -4,20 +4,31 @@ import workspace_2 from "../assets/images/workspace_2.png";
 import useLogout from "../hooks/useLogout";
 import useGetProfile from "../hooks/useGetProfile";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const WorkSpace = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [workspace, setWorkspace] = useState("");
 
   const { logout } = useLogout();
   const { profile } = useGetProfile();
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
+  const navigate = useNavigate();
 
-  const handleWorkspace = async () => {
+  const CreateWorkspace = async () => {
     try {
-      const response = await fetch("/")
+      const response = await fetch("api/workspace/createWorkspace", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: workspace }),
+      });
+
+      navigate("/tasks");
+
+      if (response.ok) {
+        return toast.success("workspace craeted succesfully");
+      }
     } catch (error) {
       toast.error("Error during logout:", error.message);
     }
@@ -46,22 +57,22 @@ const WorkSpace = () => {
               tasks, cycles and projects
             </h1>
 
-            <p className="font-myTwelthFont text-zinc-500 text-[14px]">
+            <h1 className="font-myTwelthFont text-zinc-500 text-[14px]">
               Workspace Name
-            </p>
+            </h1>
 
             <input
               type="text"
-              value={inputValue}
-              onChange={handleInputChange}
+              value={workspace}
+              onChange={(e) => setWorkspace(e.target.value)}
               placeholder={`${profile.email}`}
               className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont
                placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black mt-2 hover:border hover:border-slate-300"
             />
 
             <button
-              type="submit"
-              disabled={inputValue.trim().length === 0}
+              onClick={CreateWorkspace}
+              disabled={workspace.trim().length === 0}
               className="mt-4 px-3 py-2.5 bg-black text-white font-myTwelthFont text-center rounded-xl w-[90%] disabled:bg-[#eaebee] disabled:text-[#959aa8]"
             >
               Continue

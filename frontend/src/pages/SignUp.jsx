@@ -42,7 +42,7 @@ const SignUp = () => {
         return toast.error(data.error);
       }
 
-      navigate("/workapce-creation");
+      navigate("/workspace-creation");
 
       if (response.ok) {
         toast.success("Signup Successfully");

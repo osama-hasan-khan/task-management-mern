@@ -7,13 +7,14 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logoutUser } from "../redux/userSlice";
+import useLogout from "../hooks/useLogout";
+import useGetProfile from "../hooks/useGetProfile";
 
 const Sidebar = () => {
   const [userProfile, setUserProfile] = useState("");
 
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
+  const { logout } = useLogout();
+  const { profile } = useGetProfile();
 
   const Menus = [
     {
@@ -26,50 +27,6 @@ const Sidebar = () => {
   ];
 
   const location = useLocation();
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await fetch("/api/users/getProfile");
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch profile");
-        }
-
-        const data = await response.json();
-
-        setUserProfile(data);
-      } catch (error) {
-        toast.error("Error during logout:", error.message);
-      }
-    };
-
-    fetchProfile();
-  }, []);
-
-  const handleLogoutUser = async () => {
-    try {
-      const response = await fetch("/api/users/logoutUser", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await response.json();
-
-      dispatch(logoutUser());
-
-      if (!response.ok) {
-        return toast.error(data.error);
-      }
-
-      if (response.ok) {
-        toast.success(data.message);
-      }
-
-      navigate("/login");
-    } catch (error) {
-      toast.error("Error during logout:", error.message);
-    }
-  };
 
   return (
     <>
@@ -109,15 +66,15 @@ const Sidebar = () => {
             className="w-8 h-8 rounded"
           />
           <div className="flex flex-col">
-            <p className="font-myFifthFont">{userProfile.email}</p>
-            <p className="font-myFifthFont">{userProfile.username}</p>
+            <p className="font-myFifthFont">{profile.email}</p>
+            <p className="font-myFifthFont">{profile.username}</p>
           </div>
         </Link>
 
         <button
           type="submit"
           className="px-3 py-1.5 w-[100%] bg-zinc-50 flex items-center justify-center gap-1 font-myEighthFont text-xl"
-          onClick={handleLogoutUser}
+          onClick={logout}
         >
           <LuLogOut />
           Logout

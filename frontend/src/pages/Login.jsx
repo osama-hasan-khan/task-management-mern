@@ -43,7 +43,7 @@ const Login = () => {
       navigate("/workspace-creation");
 
       if (response.ok) {
-        return toast.success(data.success);
+        return toast.success("login successfully");
       }
     } catch (error) {
       toast.error("Error during login:", error.message);

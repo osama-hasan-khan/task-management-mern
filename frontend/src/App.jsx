@@ -10,12 +10,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import Tasks from "./components/Tasks";
 import CreateUserTask from "./pages/CreateUserTask";
 import WorkSpace from "./pages/WorkSpace";
-import { useSelector } from "react-redux";
-import { selectUser } from "./redux/userSlice";
 
 function App() {
-  const user = useSelector(selectUser);
-
   return (
     <>
       <ToastContainer position="top-right" />
