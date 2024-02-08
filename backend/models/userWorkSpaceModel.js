@@ -1,7 +1,11 @@
+import mongoose from "mongoose";
+
 const workspaceSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "TaskModel" }],
 });
 
-const UserWorkSpaceModel = mongoose.model("Workspace", workspaceSchema);
+const UserWorkspaceModel = mongoose.model("Workspace", workspaceSchema);
 
-export default UserWorkSpaceModel;
+export default UserWorkspaceModel;

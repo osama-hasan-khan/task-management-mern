@@ -21,4 +21,5 @@ router.delete("/deleteTask/:taskId", authenticate, deleteTask);
 router.get("/searchTask", authenticate, searchUserTask);
 router.put("/markAsACompleted/:taskId", authenticate, markAsACompleted);
 router.get("/status/count", authenticate, countEachTasks);
+
 export default router;

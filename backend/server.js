@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import userTask from "./routes/userTasksRoutes.js";
+import userWorkspace from "./routes/userWorkspaceRoutes.js";
 
 const PORT = process.env.PORT || 4000;
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 
 app.use("/api/users", userRoutes);
 app.use("/api/tasks", userTask);
+app.use("/api/workspace", userWorkspace);
 
 app.get("/", (req, res) => {
   res.send("SERVER IS RUNNING");
