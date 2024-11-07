@@ -10,9 +10,10 @@ import userRoutes from "./routes/userRoutes.js";
 import userTask from "./routes/userTasksRoutes.js";
 import userWorkspace from "./routes/userWorkspaceRoutes.js";
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 
 dotenv.config();
+
 connectDB();
 
 const app = express();
@@ -28,7 +29,7 @@ app.use("/api/tasks", userTask);
 app.use("/api/workspace", userWorkspace);
 
 app.get("/", (req, res) => {
-  res.send("SERVER IS RUNNING");
+  res.json({ message: "sever is running" });
 });
 
 app.listen(PORT, () => {

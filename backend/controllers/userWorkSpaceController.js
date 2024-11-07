@@ -1,16 +1,26 @@
-import UserWorkspaceModel from "../models/userWorkspaceModel.js";
+import User from "../models/User.js";
+import UserWorkspaceModel from "../models/Workspace.js";
 
 const createWorkSpace = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name, description } = req.body;
 
-    const ownerId = req.user._id;
+    const userId = req.user._id;
 
-    const workspace = new UserWorkspaceModel({ name, owner: ownerId });
+    const workspace = new UserWorkspaceModel({
+      name,
+      description,
+      owner: userId,
+      members: [userId],
+    });
 
-    await workspace.save();
+    const savedWorkspace = await workspace.save();
 
-    res.status(201).json(workspace);
+    await User.findByIdAndUpdate(userId, {
+      $push: { workspaces: savedWorkspace._id },
+    });
+
+    res.status(201).json(savedWorkspace);
   } catch (err) {
     res.status(500).json({ error: err.message });
     console.log(err);

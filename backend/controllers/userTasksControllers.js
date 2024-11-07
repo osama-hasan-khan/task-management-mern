@@ -1,4 +1,4 @@
-import UserTaskModel from "../models/userTaskModel.js";
+import UserTaskModel from "../models/User.js";
 
 const createTask = async (req, res) => {
   const { title, description, dueDate, priorityLevel, status } = req.body;
