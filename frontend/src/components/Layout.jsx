@@ -1,11 +1,10 @@
-import React from "react";
 import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
     <>
-      <div className="flex flex-1 h-screen">
+      <div className="flex flex-1 h-screen overflow-hidden">
         <div className="flex">
           <Sidebar />
         </div>

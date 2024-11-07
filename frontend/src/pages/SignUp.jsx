@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -56,10 +56,6 @@ const SignUp = () => {
 
   return (
     <>
-      <Link to="/" className="flex items-center gap-2 p-5">
-        <img src={Logo} alt="logo" className="w-6 h-6" />
-        <h1 className="font-myTwelthFont text-2xl">SaaSForge</h1>
-      </Link>
       <div className="flex flex-row h-screen justify-around items-center">
         {loading ? (
           <>
@@ -122,7 +118,7 @@ const SignUp = () => {
                   type="submit"
                   className="mt-4 px-3 py-2.5 bg-[#343434] text-white font-myTwelthFont text-center rounded-lg w-[90%] font-extralight"
                 >
-                  Continue with Email
+                  Continue
                 </button>
               </form>
             </>

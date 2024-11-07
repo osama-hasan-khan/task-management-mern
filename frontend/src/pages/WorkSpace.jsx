@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import workspace_1 from "../assets/images/workspace_1.png";
 import workspace_2 from "../assets/images/workspace_2.png";
 import useLogout from "../hooks/useLogout";
@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const WorkSpace = () => {
-  const [workspace, setWorkspace] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const { logout } = useLogout();
   const { profile } = useGetProfile();
@@ -21,7 +22,7 @@ const WorkSpace = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: workspace }),
+        body: JSON.stringify({ name, description }),
       });
 
       navigate("/tasks");
@@ -63,16 +64,24 @@ const WorkSpace = () => {
 
             <input
               type="text"
-              value={workspace}
-              onChange={(e) => setWorkspace(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder={`${profile.email}`}
+              className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont
+               placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black mt-2 hover:border hover:border-slate-300"
+            />
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="UI design..."
               className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont
                placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black mt-2 hover:border hover:border-slate-300"
             />
 
             <button
               onClick={CreateWorkspace}
-              disabled={workspace.trim().length === 0}
+              disabled={description.trim().length === 0}
               className="mt-4 px-3 py-2.5 bg-black text-white font-myTwelthFont text-center rounded-xl w-[90%] disabled:bg-[#eaebee] disabled:text-[#959aa8]"
             >
               Continue

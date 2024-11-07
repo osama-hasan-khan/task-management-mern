@@ -17,6 +17,9 @@ export default {
       myTwelthFont: ["Inter"],
       myFourteenthFont: ["Noto Sans"],
       myFifteenthFont: ["IBM Plex Sans"],
+      display: ["Clash-Grotesk"],
+      inter: ["Inter"],
+      sans:["Sofia Sans"]
     },
 
     extend: {},

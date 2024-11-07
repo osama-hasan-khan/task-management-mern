@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CiUser } from "react-icons/ci";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -57,7 +57,7 @@ const Profile = () => {
           Edit Profile
         </h1>
         <p className="font-mySixthFont font-extralight">
-          Make changes to your profile here. Click save when you're done
+          Make changes to your profile here. Click save when you&apos;re done
         </p>
         <form
           className="flex flex-col mt-8 gap-2"

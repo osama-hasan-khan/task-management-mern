@@ -21,7 +21,7 @@ const useGetProfile = () => {
   });
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [getProfile]);
 
   return { profile, refetchProfile: getProfile };
 };

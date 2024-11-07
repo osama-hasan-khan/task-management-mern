@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import myImage from "../assets/images/sign-up.png";
 import { setUser } from "../redux/userSlice";
-import Logo from "../assets/images/logo.png";
 import AuthLoading from "../components/AuthLoading";
 
 const Login = () => {
@@ -54,10 +53,6 @@ const Login = () => {
 
   return (
     <>
-      <Link to="/" className="flex items-center gap-2 p-5">
-        <img src={Logo} alt="logo" className="w-6 h-6" />
-        <h1 className="font-myTwelthFont text-2xl">SaaSForge</h1>
-      </Link>
       <div className="flex flex-row h-screen items-center justify-around">
         {loading ? (
           <>
@@ -105,14 +100,14 @@ const Login = () => {
                 type="submit"
                 className="mt-4 px-3 py-2.5 bg-[#343434] text-white font-myTwelthFont text-center rounded-lg w-[100%] font-extralight"
               >
-                Continue with Email
+                Login
               </button>
             </form>
             <Link
               to="/signup"
               className="mt-4 font-myTwelthFont text-slate-600 text-[14px]"
             >
-              Don't have an account?
+              Don&apos;t have an account?
               <button className="underline ml-2 text-[#48abd6]">Signup</button>
             </Link>
           </div>

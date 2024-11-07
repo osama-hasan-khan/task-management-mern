@@ -8,6 +8,7 @@ const useLogout = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
   const logout = useCallback(async () => {
     try {
       const response = await fetch("/api/users/logoutUser", {
@@ -30,7 +31,7 @@ const useLogout = () => {
     } catch (error) {
       toast.error("Error during logout:", error.message);
     }
-  });
+  },[dispatch, navigate]);
   return { logout };
 };
 
