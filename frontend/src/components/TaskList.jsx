@@ -2,7 +2,6 @@ import React from "react";
 import { toast } from "react-toastify";
 
 const TaskList = ({ task }) => {
-
   const formattedSpecificDate = new Date(task.dueDate)
     .toISOString()
     .slice(0, 10);
@@ -27,8 +26,6 @@ const TaskList = ({ task }) => {
       toast.error(error.message);
     }
   };
-
-
 
   return (
     <>

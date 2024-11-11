@@ -1,25 +1,40 @@
 import UserTaskModel from "../models/User.js";
+import UserWorkspaceModel from "../models/Workspace.js";
 
 const createTask = async (req, res) => {
-  const { title, description, dueDate, priorityLevel, status } = req.body;
+  const { workspaceId, projectId } = req.params;
+  const { title, description, assignees, priority, dueDate, subtasks } =
+    req.body;
 
   try {
-    const task = await UserTaskModel.create({
-      title,
-      description,
-      dueDate,
-      priorityLevel,
-      status,
-      user: req.user._id,
+    const workspace = await UserWorkspaceModel.findById(workspaceId);
+
+    const project = await ProjectModel.findOne({
+      _id: projectId,
+      workspace: workspaceId,
     });
 
-    const savedTask = await task.save();
-
-    if (savedTask) {
-      return res.status(201).json({ success: "successfull task created " });
+    if (!workspace || !project) {
+      return res.status(404).json({ error: "Workspace or project not found" });
     }
 
-    res.status(201).json(savedTask);
+    const newTask = new UserTaskModel({
+      title,
+      description,
+      workspace: workspaceId,
+      project: projectId,
+      assignees,
+      priority,
+      dueDate,
+      subtasks,
+    });
+
+    await newTask.save();
+
+    project.tasks.push(newTask._id);
+    await project.save();
+
+    res.status(201).json(newTask);
   } catch (err) {
     res.status(500).json({ error: err.message });
     console.log(err);

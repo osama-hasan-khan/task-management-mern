@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import myImage from "../assets/images/sign-up.png";
 import { setUser } from "../redux/userSlice";
-import Logo from "../assets/images/logo.png";
 import AuthLoading from "../components/AuthLoading";
 
 const SignUp = () => {
@@ -42,7 +41,7 @@ const SignUp = () => {
         return toast.error(data.error);
       }
 
-      navigate("/workspace-creation");
+      navigate("/tasks");
 
       if (response.ok) {
         toast.success("Signup Successfully");

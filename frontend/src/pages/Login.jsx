@@ -39,7 +39,7 @@ const Login = () => {
         return toast.error(data.error);
       }
 
-      navigate("/workspace-creation");
+      navigate("/tasks");
 
       if (response.ok) {
         return toast.success("login successfully");
