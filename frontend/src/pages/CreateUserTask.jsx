@@ -60,8 +60,8 @@ const CreateUserTask = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              className="fixed  z-50 flex items-center justify-center overflow-auto p-4"
-            >
+              className="fixed inset-0 flex items-center justify-center z-50"
+                    >
               <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-auto">
                 <div className="sticky top-0 bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                   <h2 className="text-2xl font-bold text-gray-800">
@@ -232,7 +232,7 @@ const CreateUserTask = () => {
                   </div>
                 </form>
               </div>
-            </motion.div> 
+            </motion.div>
           </>
         )}
       </AnimatePresence>

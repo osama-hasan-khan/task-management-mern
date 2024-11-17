@@ -1,104 +1,162 @@
-import  { useState } from "react";
-import workspace_1 from "../assets/images/workspace_1.png";
-import workspace_2 from "../assets/images/workspace_2.png";
-import useLogout from "../hooks/useLogout";
-import useGetProfile from "../hooks/useGetProfile";
+import { useState } from "react";
+
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+
+import { AnimatePresence, motion } from "framer-motion";
+import { Plus, Lock, Globe, X } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { closeWorkspaceModal } from "../redux/workspaceSlice";
 
 const WorkSpace = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-
-  const { logout } = useLogout();
-  const { profile } = useGetProfile();
+  const [visibility, setVisibility] = useState("private");
 
   const navigate = useNavigate();
 
-  const CreateWorkspace = async () => {
+  const dispatch = useDispatch();
+
+  const { isWorkspaceModalOpen } = useSelector((state) => state.workspace);
+
+  if (!isWorkspaceModalOpen) return null;
+
+  const CreateWorkspace = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch("api/workspace/createWorkspace", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, description }),
+        body: JSON.stringify({ name, description, visibility }),
       });
 
-      navigate("/tasks");
-
       if (response.ok) {
-        return toast.success("workspace craeted succesfully");
+        toast.success("Workspace created successfully");
+        navigate("/tasks");
+      } else {
+        toast.error("Failed to create workspace");
       }
     } catch (error) {
-      toast.error("Error during logout:", error.message);
+      toast.error(`Error during creation: ${error.message}`);
     }
   };
 
   return (
-    <div className="overflow-y-hidden">
-      <div className="bg-[#f9f9f9] shadow h-16 px-7 py-3 border-b border-b-[#eee] text-end">
-        <button
-          onClick={logout}
-          className="bg-[#1d1e22] text-white px-3 py-2 rounded-lg font-myFourteenthFont text-[14px]"
-        >
-          Logout
-        </button>
-      </div>
-
-      <div className="flex flex-row items-center overflow-hidden">
-        <div className="flex flex-col justify-center items-center w-[100%] h-[100%]">
-          <div className="max-w-[500px]">
-            <h1 className="font-myTwelthFont text-slate-700 text-2xl">
-              Create a new workspace
-            </h1>
-
-            <h1 className="font-myTwelthFont text-zinc-500 mt-2 text-[13px]">
-              Workspaces are shared environments where teams can collaborate on
-              tasks, cycles and projects
-            </h1>
-
-            <h1 className="font-myTwelthFont text-zinc-500 text-[14px]">
-              Workspace Name
-            </h1>
-
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder={`${profile.email}`}
-              className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont
-               placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black mt-2 hover:border hover:border-slate-300"
+    <div>
+      <AnimatePresence>
+        {isWorkspaceModalOpen && (
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => dispatch(closeWorkspaceModal())}
+              className="fixed inset-0 bg-black bg-opacity-50 z-40"
             />
-            <input
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="UI design..."
-              className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont
-               placeholder:font-myTwelthFont placeholder:text-[12px] w-[90%] text-black mt-2 hover:border hover:border-slate-300"
-            />
-
-            <button
-              onClick={CreateWorkspace}
-              disabled={description.trim().length === 0}
-              className="mt-4 px-3 py-2.5 bg-black text-white font-myTwelthFont text-center rounded-xl w-[90%] disabled:bg-[#eaebee] disabled:text-[#959aa8]"
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="fixed inset-0 flex items-center justify-center z-50"
             >
-              Continue
-            </button>
-          </div>
-        </div>
+              {
+                <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-md max-w-2xl w-full mx-auto p-6">
+                  <button
+                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                    onClick={() => dispatch(closeWorkspaceModal())}
+                   >
+                    <X className="w-6 h-6" />
+                  </button>
+                  <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+                    Create New Workspace
+                  </h2>
+                  <form onSubmit={CreateWorkspace} className="space-y-6">
+                    <div>
+                      <label
+                        htmlFor="workspace-name"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                      >
+                        Workspace Name
+                      </label>
+                      <input
+                        type="text"
+                        id="workspace-name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                        placeholder="Enter workspace name"
+                      />
+                    </div>
 
-        <div className="w-[100%] relative">
-          <img src={workspace_2} alt="logo" className="w-[100%] h-[100vh]" />
+                    <div>
+                      <label
+                        htmlFor="workspace-description"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                      >
+                        Description
+                      </label>
+                      <textarea
+                        id="workspace-description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        rows={3}
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                        placeholder="Describe your workspace"
+                      />
+                    </div>
 
-          <img
-            src={workspace_1}
-            alt="logo"
-            className="w-[100%] h-[100vh] absolute top-20 object-contain"
-          />
-        </div>
-      </div>
+                    <div className="flex space-x-4">
+                      <motion.button
+                        type="button"
+                        onClick={() => setVisibility("private")}
+                        className={`flex items-center px-4 py-2 rounded-md ${
+                          visibility === "private"
+                            ? "bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200"
+                            : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
+                        } transition-colors duration-200`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Lock className="w-5 h-5 mr-2" />
+                        Private
+                      </motion.button>
+                      <motion.button
+                        type="button"
+                        onClick={() => setVisibility("public")}
+                        className={`flex items-center px-4 py-2 rounded-md ${
+                          visibility === "public"
+                            ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200"
+                            : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
+                        } transition-colors duration-200`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Globe className="w-5 h-5 mr-2" />
+                        Public
+                      </motion.button>
+                    </div>
+
+                    <motion.button
+                      type="submit"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Plus className="w-5 h-5 mr-2" />
+                      Create Workspace
+                    </motion.button>
+                  </form>
+                </div>
+              }
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -1,20 +1,24 @@
-import { useState } from "react";
 import {
-  LayoutDashboard,
-  CheckSquare,
   Calendar,
-  Settings,
-  Menu,
-  X,
-  PlusSquare,
-  Clock,
+  CheckSquare,
   ChevronDown,
   ChevronRight,
+  Clock,
   Folder,
+  Layout,
+  LayoutDashboard,
+  Menu,
+  PlusSquare,
+  Search,
+  Settings,
+  X,
 } from "lucide-react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { openModal } from "../redux/modelSlice";
 import CreateUserTask from "../pages/CreateUserTask";
+import WorkSpace from "../pages/WorkSpace";
+import { openModal } from "../redux/modelSlice";
+import { openWorkspaceModal } from "../redux/workspaceSlice";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -58,14 +62,6 @@ const Dashboard = () => {
     { id: "settings", icon: Settings, label: "Settings" },
   ];
 
-  // const toggleWorkspace = (workspaceId) => {
-  //   setExpandedWorkspaces((prev) =>
-  //     prev.includes(workspaceId)
-  //       ? prev.filter((id) => id !== workspaceId)
-  //       : [...prev, workspaceId]
-  //   );
-  // };
-
   const toggleWorkspace = (workspaceId) => {
     setExpandedWorkspaces((prev) => (prev === workspaceId ? "" : workspaceId));
   };
@@ -75,7 +71,7 @@ const Dashboard = () => {
       <div
         className={`${
           isSidebarOpen ? "w-64" : "w-20"
-        } bg-white shadow-lg transition-all duration-300 relative flex flex-col`}
+        } bg-white transition-all duration-300 relative flex flex-col`}
       >
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -85,12 +81,19 @@ const Dashboard = () => {
         </button>
 
         <div className="p-4 flex-shrink-0">
-          <h1
-            className={`font-bold text-xl mb-8 ${!isSidebarOpen && "hidden"}`}
-          >
-            TaskMaster
-          </h1>
+          <div className="flex items-center space-x-3 pb-3">
+            <div className="bg-indigo-50 p-2 rounded-xl">
+              <Layout className="h-6 w-6 text-indigo-600" />
+            </div>
 
+            <h1
+              className={`text-xl font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text ${
+                !isSidebarOpen && "hidden"
+              }`}
+            >
+              TaskFlow
+            </h1>
+          </div>
           <nav className="space-y-2">
             {menuItems.map((item) => (
               <button
@@ -99,7 +102,7 @@ const Dashboard = () => {
                 className={`w-full flex items-center p-3 rounded-lg transition-colors
                   ${
                     selectedTab === item.id
-                      ? "bg-blue-100 text-blue-600"
+                      ? "bg-gray-100 text-[#000000]"
                       : "hover:bg-gray-100"
                   }`}
               >
@@ -113,6 +116,7 @@ const Dashboard = () => {
         </div>
 
         {/* Workspace Section */}
+        <WorkSpace />
         <div
           className={`p-4 flex-1 overflow-y-auto ${!isSidebarOpen && "hidden"}`}
         >
@@ -120,10 +124,14 @@ const Dashboard = () => {
             <h2 className="text-sm font-semibold text-gray-500 uppercase">
               Workspaces
             </h2>
-            <button className="text-blue-600 hover:bg-blue-50 p-1 rounded">
+            <button
+              className="text-blue-600 hover:bg-blue-50 p-1 rounded"
+              onClick={() => dispatch(openWorkspaceModal())}
+            >
               <PlusSquare size={16} />
             </button>
           </div>
+          <CreateUserTask />
 
           <div className="space-y-2">
             {workspaces.map((workspace) => (
@@ -173,7 +181,6 @@ const Dashboard = () => {
       <div className="flex-1 overflow-hidden">
         {/* Header */}
 
-        <CreateUserTask />
         <header className="bg-white shadow-sm p-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold">
@@ -190,13 +197,23 @@ const Dashboard = () => {
               )}
             </h2>
             <div className="flex gap-4">
-              <button
-                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-                onClick={() => dispatch(openModal())}
-              >
-                <PlusSquare size={20} />
-                <span>New Task</span>
-              </button>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search tasks..."
+                  className="w-80 pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                />
+                <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+              </div>
+              <div className="flex gap-4">
+                <button
+                  className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                  onClick={() => dispatch(openModal())}
+                >
+                  <PlusSquare size={20} />
+                  <span>New Task</span>
+                </button>
+              </div>
             </div>
           </div>
         </header>

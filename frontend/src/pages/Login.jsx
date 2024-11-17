@@ -39,7 +39,7 @@ const Login = () => {
         return toast.error(data.error);
       }
 
-      navigate("/tasks");
+      navigate("/dashboard");
 
       if (response.ok) {
         return toast.success("login successfully");
