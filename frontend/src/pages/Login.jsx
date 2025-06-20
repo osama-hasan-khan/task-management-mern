@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -60,17 +60,13 @@ const Login = () => {
           </>
         ) : (
           <div className="flex flex-col justify-center">
-            <h1 className="text-4xl font-myTwelthFont text-black text-[29px]">
-              Login
-            </h1>
-            <h1 className="text-4xl font-myTwelthFont text-zinc-500 text-[15px]">
+            <h1 className="text-4xl text-black text-[29px]">Login</h1>
+            <h1 className="text-4xl text-zinc-500 text-[15px]">
               Welcome back! Please enter your details.
             </h1>
 
             <form className="flex flex-col mt-3 gap-2" onSubmit={handleLogin}>
-              <label className="font-myTwelthFont text-zinc-500 mt-3 text-[13px]">
-                Email
-              </label>
+              <label className="text-zinc-500 mt-3">Email</label>
 
               <input
                 type="email"
@@ -79,12 +75,10 @@ const Login = () => {
                   setInputs({ ...inputs, email: e.target.value })
                 }
                 value={inputs.email}
-                className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[100%] text-black"
+                className="outline-none border border-slate-400 px-3 py-2.5 rounded-lg text-black"
               />
 
-              <label className="font-myTwelthFont text-zinc-500 mt-2 text-[13px]">
-                Password
-              </label>
+              <label className="text-zinc-500 mt-2 text-[13px]">Password</label>
 
               <input
                 type="password"
@@ -93,31 +87,24 @@ const Login = () => {
                 }
                 value={inputs.password}
                 placeholder="your password"
-                className="outline-none border border-slate-200 px-3 py-2.5 rounded-lg font-myTwelthFont placeholder:font-myTwelthFont placeholder:text-[12px] w-[100%] text-black"
+                className="outline-none border border-slate-400 px-3 py-2.5 rounded-lg text-black"
               />
 
               <button
                 type="submit"
-                className="mt-4 px-3 py-2.5 bg-[#343434] text-white font-myTwelthFont text-center rounded-lg w-[100%] font-extralight"
+                className="mt-4 px-3 py-2.5 bg-[#343434] text-white text-center rounded-lg w-[50%]"
               >
                 Login
               </button>
             </form>
-            <Link
-              to="/signup"
-              className="mt-4 font-myTwelthFont text-slate-600 text-[14px]"
-            >
+            <Link to="/signup" className="mt-4 text-slate-600">
               Don&apos;t have an account?
               <button className="underline ml-2 text-[#48abd6]">Signup</button>
             </Link>
           </div>
         )}
 
-        <img
-          src={myImage}
-          alt="image"
-          className="w-[40%] h-[100%%] object-contain"
-        />
+        <img src={myImage} alt="image" className="w-[40%] object-contain" />
       </div>
     </>
   );
