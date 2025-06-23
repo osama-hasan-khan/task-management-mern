@@ -49,7 +49,9 @@ cd ../client
 npm install
 
 ### - ⚙️ Environment Variables
-- creant a .env file the server/ directory:
+
+- create a .env file the server/ directory:
+
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/task-manager
 JWT_SECRET=your_jwt_secret
