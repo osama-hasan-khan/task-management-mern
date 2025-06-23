@@ -16,12 +16,17 @@
 
 ---
 
-## 🧪 Setup Instructions
-### 1. Clone the Repo
-### 2. Install the dependencies
+## 🔧 Installation
 
+```bash
+# Clone the repository
+git clone https://github.com/your-username/task-manager-app.git
+cd task-manager-app
+
+# Install backend
 cd server
 npm install
 
+# Install frontend
 cd ../client
 npm install
